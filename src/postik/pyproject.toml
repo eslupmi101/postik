@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "postik"
+version = "0.1.0"
+description = ""
+authors = ["eslupmi101 <ajsen-andreev@yandex.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "3.2.23"
+python-dotenv = "^1.0.1"
+qrcode = {extras = ["pil"], version = "^7.4.2"}
+svgwrite = "^1.4.3"
+djangorestframework = "^3.15.1"
+django-components = "0.67"
+requests = "^2.32.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href={% static 'public/css/auth.css' %} />
+{% endblock %}
+{% block content %}
+<div class="split left">
+  <div class="centered">
+    <img id="logo-cloud" src={% static '/public/images/logo-cloud.svg' %} />
+  </div>
+</div>
+
+<div class="split right">
+  <div id="right" class="centered">
+    {{ auth_qr_code_svg|safe }}
+    <img id="duck__gif" src={% static '/public/images/duck-auth.gif' %} alt="Duck Image" />
+    <img id="duck__chair" src={% static '/public/images/duck-chair.svg' %}>
+    <div id="enter-author-text">
+      <b>Войти как автор</b>
+      <p id="medium-p">Отсканируйте QR-код с устройства где установлен</p>
+      <p id="bottom-p">Телеграм либо нажмите на кнопку</p>
+    </div>
+
+    <div id="button">
+        <a href="{{ telegram_auth_link }}" class="button-text" target="_blank">Перейти в Телеграм</a>
+    </div>
+  </div>
+
+  <div id="redirect-checker"
+     hx-get="{% url 'api:auth_telegram_check' %}"
+     hx-trigger="every 2s"
+     hx-target="#redirect-checker"
+     hx-redirect="true">
+  </div>
+</div>
+{% endblock %}
