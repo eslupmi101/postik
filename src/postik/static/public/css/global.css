@@ -5,14 +5,62 @@ body {
 
 :root {
   /* fonts */
-  --font-joyride: 'Joyride', sans-serif;
-  --font-trial-factor-a: "TRIAL Factor A";
+  --font-joyride: Joyride;
+  --font-trial-factor-a-bold: "TRIAL Factor A Bold";
+  --font-trial-factor-a-medium: "TRIAL Factor A Medium";
+  --font-trial-factor-a-regular: "TRIAL Factor A Regular";
+  --font-inter: Inter;
 
   /* font sizes */
   --font-size-lg: 18px;
+  --font-size-5xl: 24px;
+  --font-size-base: 16px;
+  --font-size-xl: 20px;
+  --font-size-lgi: 19px;
 
   /* Colors */
   --color-white: #fff;
   --color-black: #000;
+  --color-darkslategray-100: #333;
+  --color-darkslategray-200: rgba(48, 48, 48, 0.75);
   --color-gray: #160c28;
+
+  /* Gaps */
+  --gap-base: 16px;
+  --gap-xl: 20px;
+  --gap-5xs-9: 7.9px;
+
+  /* Paddings */
+  --padding-6xl: 25px;
+  --padding-31xl: 50px;
+  --padding-8xs: 5px;
+  --padding-smi: 13px;
+  --padding-11xs: 2px;
+  --padding-xl: 20px;
+
+  /* Border radiuses */
+  --br-5xs: 8px;
+}
+
+@font-face {
+  font-family: "TRIAL Factor A Bold";
+  src: url("/static/public/fonts/TRIALFactorA-Bold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "TRIAL Factor A Medium";
+  src: url("/static/public/fonts/TRIALFactorA-Medium.otf") format("truetype");
+}
+
+@font-face {
+  font-family: "TRIAL Factor A Regular";
+  src: url("/static/public/fonts/TRIALFactorA-Regular.otf") format("truetype");
+}
+
+button:hover {
+  background-color: var(--color-darkslategray-100);
+}
+
+a {
+  text-decoration: none;
 }

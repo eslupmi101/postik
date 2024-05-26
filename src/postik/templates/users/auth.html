@@ -9,7 +9,6 @@
     <img id="logo-cloud" src={% static '/public/images/logo-cloud.svg' %} />
   </div>
 </div>
-
 <div class="split right">
   <div id="right" class="centered">
     {{ auth_qr_code_svg|safe }}
@@ -20,9 +19,9 @@
       <p id="medium-p">Отсканируйте QR-код с устройства где установлен</p>
       <p id="bottom-p">Телеграм либо нажмите на кнопку</p>
     </div>
-
-    <div id="button">
-        <a href="{{ telegram_auth_link }}" class="button-text" target="_blank">Перейти в Телеграм</a>
+    <a href="{{ telegram_auth_link }}" target="_blank">
+      <button id="button" class="button-text" >Перейти в Телеграм </button>
+    </a>
     </div>
   </div>
 

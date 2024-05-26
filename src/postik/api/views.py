@@ -10,7 +10,7 @@ from rest_framework.views import APIView
 
 from users.models import TelegramProfile, User
 
-from .permissions import BotTokenPermission
+from .permissions import AuthTelegramCheckPermission, BotTokenPermission
 from .serailizer import TelegramProfileSerializer
 
 
@@ -73,6 +73,8 @@ class BotManagerAuthView(APIView):
 
 
 class AuthTelegramCheckView(APIView):
+    permission_classes = (AuthTelegramCheckPermission,)
+
     def get(self, request):
         telegram_id = request.session.get('telegram_id')
 

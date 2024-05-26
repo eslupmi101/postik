@@ -1,19 +1,3 @@
-@font-face {
-  font-family: "TRIAL Factor A";
-  src: url("/static/public/fonts/TRIALFactorA-Regular.otf");
-  font-weight: 400;
-}
-@font-face {
-  font-family: "TRIAL Factor A";
-  src: url("/static/public/fonts/TRIALFactorA-Regular.otf");
-  font-weight: 500;
-}
-@font-face {
-  font-family: "TRIAL Factor A";
-  src: url("/static/public/fonts/TRIALFactorA-Bold.otf");
-  font-weight: 700;
-}
-
 .logo-1-icon {
   align-self: stretch;
   height: 26.7px;
@@ -23,6 +7,7 @@
   flex-shrink: 0;
   object-fit: cover;
 }
+
 .logo-1-wrapper {
   width: 132.3px;
   display: flex;
@@ -32,6 +17,7 @@
   padding: 8.3px 0 0;
   box-sizing: border-box;
 }
+
 .frame-child {
   height: 43.4px;
   width: 106.2px;
@@ -40,24 +26,27 @@
   background-color: var(--color-black);
   display: none;
 }
-.div1 {
+
+.button-text {
   align-self: stretch;
   flex: 1;
   position: relative;
   font-size: var(--font-size-base);
   font-weight: 500;
-  font-family: var(--font-trial-factor-a);
+  font-family: var(--font-trial-factor-a-medium);
   color: var(--color-white);
   text-align: center;
   white-space: nowrap;
   z-index: 1;
 }
+
 .frame-parent,
 .rectangle-group {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 }
+
 .rectangle-group {
   cursor: pointer;
   border: 0;
@@ -69,15 +58,13 @@
   justify-content: flex-start;
   box-sizing: border-box;
 }
-.group-button:hover,
-.rectangle-group:hover {
-  background-color: var(--color-darkslategray-100);
-}
+
 .frame-parent {
   align-self: stretch;
   justify-content: space-between;
   gap: var(--gap-xl);
 }
+
 .frame-item {
   position: absolute;
   top: 72.4px;
@@ -87,9 +74,11 @@
   width: 305.8px;
   height: 67.1px;
 }
-.span {
+
+.title__bottom {
   color: var(--color-white);
 }
+
 .h1 {
   margin: 0;
   position: absolute;
@@ -103,6 +92,8 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  font-size: 64px;
+  font-family: var(--font-trial-factor-a-medium);
 }
 .rectangle-container {
   height: 140px;
@@ -122,12 +113,21 @@
 .span1 {
   font-weight: 500;
 }
+
+.span {
+  color: white;
+}
+
 .postik-container {
   align-self: stretch;
   height: 58px;
   position: relative;
   display: inline-block;
+  font-family: 'TRIAL Factor A Medium';
+  font-weight: 600;
+  font-size: var(--font-size-5xl);
 }
+
 .frame-inner {
   height: 61.6px;
   width: 415.4px;
@@ -443,6 +443,7 @@
   flex-direction: column;
   padding: 0 0 15.1px;
   gap: 32.6px;
+  font-family: 'TRIAL Factor A Regular';
 }
 .aniducks-agaduw4aapt9iug-ezgif-icon4 {
   height: 57px;
@@ -541,6 +542,7 @@
   justify-content: space-between;
   gap: var(--gap-xl);
   max-width: 100%;
+  font-family: 'TRIAL Factor A Medium';
 }
 .main-screen,
 .main-screen-child {
@@ -560,7 +562,7 @@
   position: relative;
   background-color: var(--color-white);
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-start;
   padding: 15.7px var(--padding-6xl) 32.3px;
   gap: 65.1px;
@@ -654,6 +656,11 @@
     box-sizing: border-box;
   }
   .main-screen {
-    gap: var(--gap-base);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: inline-block;
   }
 }

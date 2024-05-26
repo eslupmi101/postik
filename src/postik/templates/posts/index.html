@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block extra_css %}
-<link rel="stylesheet" href={% static 'public/css/index.css' %} />
+<link rel="stylesheet" href={% static '/public/css/index.css' %} />
 {% endblock %}
 {% block content %}
 <div class="main-screen">
@@ -11,13 +11,12 @@
         class="logo-1-icon"
         loading="lazy"
         alt=""
-        src="./public/logo-1@2x.png"
+        src={% static '/public/images/logo/logo-header.png'  %}
       />
     </div>
-    <button class="rectangle-group">
-      <div class="frame-child"></div>
-      <div class="div1">Войти</div>
-    </button>
+    <a href={% url 'users:signup' %} class="link">
+      <button id="button" class="button-text rectangle-group" >Войти</button>
+    </a>
   </header>
   <main class="main-screen-inner">
     <section class="frame-group">
@@ -41,10 +40,10 @@
               >
             </div>
             <div class="frame-wrapper1">
-              <button class="group-button">
-                <div class="frame-inner"></div>
-                <b class="b1">Начать пользоваться</b>
-              </button>
+              
+              <a href={% url 'users:signup' %} class="link">
+                <button id="button" class="group-button frame-inner " ><b class="b1">Начать пользоваться</b></button>
+              </a>
             </div>
           </div>
           <div class="utyaduckfull-agadnbkaas3nkuk-e-wrapper">
@@ -52,7 +51,7 @@
               class="utyaduckfull-agadnbkaas3nkuk-e-icon"
               loading="lazy"
               alt=""
-              src="./public/utyaduckfull-agadnbkaas3nkukezgif-2@2x.png"
+              src={% static '/public/images/gif/duck-eat-message.gif'  %}
             />
           </div>
         </div>
@@ -65,7 +64,7 @@
                 class="aniducks-agaduw4aapt9iug-ezgif-icon"
                 loading="lazy"
                 alt=""
-                src="./public/aniducks-agaduw4aapt9iugezgif-1@2x.png"
+                src={% static '/public/images/gif/duck-sort.gif' %}
               />
 
               <div class="frame-wrapper2">
@@ -83,9 +82,8 @@
                   class="aniducks-agaduw4aapt9iug-ezgif-icon1"
                   loading="lazy"
                   alt=""
-                  src="./public/aniducks-agaduw4aapt9iugezgif-3@2x.png"
+                  src={% static '/public/images/gif/duck-post.gif'  %}
                 />
-
                 <div class="wrapper">
                   <b class="b3">Визитка</b>
                 </div>
@@ -103,17 +101,12 @@
           <div class="frame-parent4">
             <div class="frame-parent5">
               <div class="aniducks-agaduw4aapt9iug-ezgif-container">
-                <img
-                  class="aniducks-agaduw4aapt9iug-ezgif-icon2"
-                  alt=""
-                  src="./public/aniducks-agaduw4aapt9iugezgif-2@2x.png"
-                />
 
                 <img
                   class="aniducks-agaduw4aapt9iug-ezgif-icon3"
                   loading="lazy"
                   alt=""
-                  src="./public/aniducks-agaduw4aapt9iugezgif-2@2x.png"
+                  src={% static '/public/images/gif/duck-buy.gif'  %}
                 />
               </div>
               <div class="frame">
@@ -127,27 +120,28 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="frame-wrapper5">
-        <div class="aniducks-agaduw4aapt9iug-ezgif-parent1">
-          <img
-            class="aniducks-agaduw4aapt9iug-ezgif-icon4"
-            loading="lazy"
-            alt=""
-            src="./public/aniducks-agaduw4aapt9iugezgif-5@2x.png"
-          />
-
-          <div class="frame-wrapper6">
-            <div class="group">
-              <b class="b5">Без кода</b>
-              <div class="div5">
-                Для создания своей визитки и продажи постов вам не нужно
-                писать ни строчки кода
+        <div class="frame-wrapper5">
+          <div class="aniducks-agaduw4aapt9iug-ezgif-parent1">
+            <img
+              class="aniducks-agaduw4aapt9iug-ezgif-icon4"
+              loading="lazy"
+              alt=""
+              src={% static '/public/images/gif/duck-happy.gif'  %}
+            />
+  
+            <div class="frame-wrapper6">
+              <div class="group">
+                <b class="b5">Без кода</b>
+                <div class="div5">
+                  Для создания своей визитки и продажи постов вам не нужно
+                  писать ни строчки кода
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      
     </section>
   </main>
   <div class="main-screen-child">
@@ -157,4 +151,5 @@
     </div>
   </div>
 </div>
+</body>
 {% endblock %}
