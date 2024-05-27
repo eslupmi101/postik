@@ -26,16 +26,14 @@ async def send_auth_request(
     telegram_id: str,
     username: str
 ) -> tuple[str, dict]:
-    """
-    Send auth or registration request to backend api.
-    """
+    """Send auth or registration request to backend api."""
     headers = {
-        "Bot-Token": TOKEN
+        'Bot-Token': TOKEN
     }
     payload = {
-        "session_id": session_id,
-        "telegram_id": telegram_id,
-        "username": username
+        'session_id': session_id,
+        'telegram_id': telegram_id,
+        'username': username
     }
     async with aiohttp.ClientSession() as session:
         url = f'{API_URL}/api/v1/auth/bot_manager/'
@@ -51,6 +49,7 @@ async def send_auth_request(
 
 @dp.message(CommandStart(deep_link=True))
 async def auth_handler(message: Message, command: CommandObject):
+    """Auth users from Postik."""
     args = command.args
 
     try:
@@ -82,6 +81,6 @@ async def main() -> None:
     await dp.start_polling(bot)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())

@@ -1,0 +1,63 @@
+name: Master deploy Foodgram workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  postik_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10.12"]
+        poetry-version: ["1.7.1"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: |
+        cd src/postik
+        poetry install
+    - name: Test with flake8 and django tests
+      env:
+        SECRET_KEY: testsecretkey
+      run: |
+        cd src/postik
+        poetry run flake8 .
+        poetry run python manage.py test
+  
+  postik_manager_bot_tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10.12"]
+        poetry-version: ["1.7.1"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: |
+        cd src/manager_bot_postik
+        poetry install
+    - name: Test with flake8
+      run: |
+        cd src/manager_bot_postik
+        poetry run flake8 .
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: 
+      - postik_tests
+      - postik_manager_bot_tests
+    steps:
+      - name: Executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            cd /home/aroach/postik/postik/
+            git pull
+            sudo service postik restart
+            sudo service postik_manager_bot restart
