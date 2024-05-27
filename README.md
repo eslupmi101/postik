@@ -4,7 +4,7 @@
 ### **Описание**
 
 Postik - web-site
-Manager bot postik - bot for auth
+Manager bot postik - bot for auth and reg
 
 ### Разработчики
 Айсен Андреев: tg @aisen_andreev
