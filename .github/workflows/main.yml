@@ -63,7 +63,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            cd /home/aroach/postik/postik/
-            git pull
-            sudo service postik restart
-            sudo service postik_manager_bot restart
+            cd /home/aroach/postik/
+            ./github_actions.sh
