@@ -5,3 +5,6 @@
 
 Postik - web-site
 Manager bot postik - bot for auth
+
+### Разработчики
+Айсен Андреев: tg @aisen_andreev
