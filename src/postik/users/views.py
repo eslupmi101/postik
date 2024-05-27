@@ -1,10 +1,11 @@
+from django.contrib.auth import logout
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from .utils import generate_qr_code_svg, get_telegram_auth_link
 
 
-def auth(request):
+def auth_view(request):
     if request.user.is_authenticated:
         return redirect(reverse('posts:index'))
 
@@ -17,3 +18,8 @@ def auth(request):
     }
 
     return render(request, 'users/auth.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('posts:index')
