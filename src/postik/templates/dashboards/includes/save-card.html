@@ -1,0 +1,8 @@
+{% for field in form %}
+  {% for error in field.errors %}
+    <li>{{field.label}}: {{ error }}</li>
+  {% endfor %}
+{% endfor %}
+{% if success %}
+  <div>Карта обновлена</div>
+{% endif %}

@@ -87,9 +87,11 @@ class AuthTelegramCheckView(APIView):
 
         del request.session['telegram_id']
         request.session.modified = True
+
+        next_url = request.GET.get('next', 'posts:index')
         return Response(
             headers={
-                'HX-Redirect': resolve_url('posts:index')
+                'HX-Redirect': resolve_url(next_url)
             },
             status=status.HTTP_302_FOUND
         )

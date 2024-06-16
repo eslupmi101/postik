@@ -1,0 +1,50 @@
+{% load static %}
+<div id="modal"
+     _="on closeModal add .closing then wait for animationend then remove me then trigger updateCardPosts on body">
+  <div class="modal-underlay" _="on click trigger closeModal"></div>
+  <div class="modal-content">
+    <h1 class="a">Ваши посты</h1>
+    <div class="posts-add-list">
+      {% csrf_token %}
+      {% for post in posts %}
+        {% if post.id in card.id_selected_posts %}
+          <button
+            class="post-add_choosen"
+            hx-post="{% url 'dashboards:modal-posts' %}"
+            hx-vals='{"post_id": "{{ post.id }}", "csrfmiddlewaretoken": "{{ csrf_token }}"}'
+            hx-target=".posts-add-list"
+            hx-swap="innerHTML"
+            type="button">
+            <div class="post-id">№ {{ post.id }}</div>
+            <div class="input4">
+              <div class="parent11">{{ post.image }}</div>
+              <div class="parent12">
+                <b class="b26">{{ post.title }}</b>
+                <div class="div42">{{ post.description }}</div>
+              </div>
+              <div class="input-child">{{ post.price }}₽</div>
+            </div>
+          </button>
+        {% else %}
+          <button
+            class="post-add"
+            hx-post="{% url 'dashboards:modal-posts' %}"
+            hx-vals='{"post_id": "{{ post.id }}", "csrfmiddlewaretoken": "{{ csrf_token }}"}'
+            hx-target=".posts-add-list"
+            hx-swap="innerHTML"
+            type="button">
+            <div class="post-id">№ {{ post.id }}</div>
+            <div class="input4">
+              <div class="parent11">{{ post.image }}</div>
+              <div class="parent12">
+                <b class="b26">{{ post.title }}</b>
+                <div class="div42">{{ post.description }}</div>
+              </div>
+              <div class="input-child">{{ post.price }}₽</div>
+            </div>
+          </button>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

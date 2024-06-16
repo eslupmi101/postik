@@ -18,6 +18,8 @@ INSTALLED_APPS = [
     'posts',
     'users',
     'api',
+    'core',
+    'dashboards',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,7 +84,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -105,3 +107,8 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 BOT_MANAGER_TOKEN = os.getenv('BOT_MANAGER_TOKEN')
 
 BOT_MANAGER_NAME = os.getenv('BOT_MANAGER_NAME')
+
+# Media
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

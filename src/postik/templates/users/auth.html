@@ -26,10 +26,10 @@
   </div>
 
   <div id="redirect-checker"
-     hx-get="{% url 'api:auth_telegram_check' %}"
-     hx-trigger="every 2s"
-     hx-target="#redirect-checker"
-     hx-redirect="true">
+    hx-get="{% url 'api:auth_telegram_check' %}?next={{ request.GET.next|default:'/' }}"
+    hx-trigger="every 2s"
+    hx-target="#redirect-checker"
+    hx-redirect="true">
   </div>
 </div>
 {% endblock %}

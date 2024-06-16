@@ -1,0 +1,116 @@
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href={% static 'public/css/sidebar.css' %} />
+{% endblock %}
+<div class="side-bar">
+  <div class="side-bar-child"></div>
+  <div class="side-bar-item"></div>
+  <div class="side-bar-inner">
+    <div class="postik-group">
+      <img
+        loading="lazy"
+        alt="Postik"
+        src={% static '/public/images/dashboard/postik-logo-sidebar.svg' %}
+      />
+    </div>
+    <div class="frame-parent16">
+      <a href={% url 'dashboards:design' %} class="link">
+        {% if title == 'Дизайн' %}
+          <div class="frame-parent17" style="font-family: TRIAL Factor A Bold;">
+            <div class="icon-frame">
+              <img
+                class="icon4"
+                loading="lazy"
+                alt=""
+                src="{% static '/public/images/dashboard/side-bar/art.svg' %}"
+              />
+            </div>
+            <div class="div32">Дизайн</div>
+          </div>
+        {% else %}
+          <div class="frame-parent17">
+            <div class="icon-frame">
+              <img
+                class="icon4"
+                loading="lazy"
+                alt=""
+                src="{% static '/public/images/dashboard/side-bar/art.svg' %}"
+              />
+            </div>
+            <div class="div32">Дизайн</div>
+          </div>
+        {% endif %}
+      </a>
+      <a href={% url 'dashboards:connect' %} class="link">
+        {% if title == "Монетизация" %}
+        <div class="frame-parent18" style="font-family: TRIAL Factor A Bold;">
+          <div class="icon-wrapper1">
+            <img class="icon5" alt="" src={% static '/public/images/dashboard/side-bar/connect.svg' %} />
+          </div>
+          <div class="div33">Монетизация</div>
+        </div>
+        {% else %}
+          <div class="frame-parent18">
+            <div class="icon-wrapper1">
+              <img class="icon5" alt="" src={% static '/public/images/dashboard/side-bar/connect.svg' %} />
+            </div>
+            <div class="div33">Монетизация</div>
+          </div>
+        {% endif %}
+      </a>
+      {% if title == "Посты" %}
+        <div class="frame-parent18" style="font-family: TRIAL Factor A Bold;">
+          <div class="icon-wrapper2">
+            <img class="icon6" alt="" src={% static '/public/images/dashboard/side-bar/publish.svg' %} />
+          </div>
+          <div class="div34">Посты</div>
+        </div>
+      {% else %}
+        <div class="frame-parent18">
+          <div class="icon-wrapper1">
+            <img class="icon5" alt="" src={% static '/public/images/dashboard/side-bar/publish.svg' %} />
+          </div>
+          <div class="div33">Посты</div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="side-bar-inner1">
+    <div class="frame-parent20">
+      <div class="frame-parent21">
+        <div class="frame-wrapper11">
+          <div class="frame-parent22">
+            <div class="icon-wrapper3">
+              <img class="icon7" alt="" src={% static '/public/images/dashboard/side-bar/settings.svg' %} />
+            </div>
+            <div class="div36">Настройки</div>
+          </div>
+        </div>
+        <a href={% url 'users:logout' %} class="link">
+          <div class="frame-parent23">
+            <div class="icon-wrapper4">
+              <img class="icon8" alt="" src={% static '/public/images/dashboard/side-bar/exit.svg' %} />
+            </div>
+            <div class="div36">Выход</div>
+          </div>
+        </a>
+      </div>
+      <div class="frame-wrapper12">
+        <div class="ellipse-group">
+          <div class="frame-child8"></div>
+          <img
+            class="lounge-chair-1-1"
+            alt=""
+            src={% static '/public/images/dashboard/side-bar/lounge-chair.svg' %}
+          />
+          <img
+            class="utyaduckfull-agadtruaavjwqek-e-icon"
+            loading="lazy"
+            alt=""
+            src={% static '/public/images/dashboard/side-bar/duck-news.svg' %}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

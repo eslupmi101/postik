@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href={% static 'public/css/connect.css' %} />
+{% endblock %}
+{% block content %}
+<div class="design-tab">
+    {% include 'dashboards/includes/sidebar.html' %}
+    Отправить пост через бота
+</div>
+{% endblock %}

@@ -33,7 +33,7 @@
   position: relative;
   font-size: var(--font-size-base);
   font-weight: 500;
-  font-family: var(--font-trial-factor-a-medium);
+  font-family: var(--font-trial-factor-a-regular);
   color: var(--color-white);
   text-align: center;
   white-space: nowrap;
@@ -183,7 +183,6 @@
   justify-content: flex-start;
   gap: 50.9px;
   flex-shrink: 0;
-  debug_commit: bf4bc93;
 }
 .utyaduckfull-agadnbkaas3nkuk-e-icon {
   height: 246.9px;
@@ -192,7 +191,6 @@
   border-radius: 30px;
   object-fit: cover;
   flex-shrink: 0;
-  debug_commit: bf4bc93;
 }
 .utyaduckfull-agadnbkaas3nkuk-e-wrapper {
   align-self: stretch;
@@ -275,7 +273,6 @@
 .b3 {
   position: relative;
   flex-shrink: 0;
-  debug_commit: bf4bc93;
 }
 .aniducks-agaduw4aapt9iug-ezgif-icon1 {
   height: 51.9px;
