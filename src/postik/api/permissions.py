@@ -8,6 +8,12 @@ class BotTokenPermission(BasePermission):
         return bot_token == settings.BOT_MANAGER_TOKEN
 
 
+class BotHandlerTokenPermission(BasePermission):
+    def has_permission(self, request, *_):
+        bot_token = request.headers.get('Bot-Token')
+        return bot_token == settings.BOT_HANDLER_TOKEN
+
+
 class AuthTelegramCheckPermission(BasePermission):
     def has_permission(self, request, *_):
         return not request.user.is_authenticated

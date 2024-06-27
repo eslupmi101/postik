@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "handler-bot-postik"
+version = "0.1.0"
+description = ""
+authors = ["eslupmi101 <ajsen-andreev@yandex.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^1.0.1"
+aiogram = "^3.7.0"
+loguru = "^0.7.2"
+aiohttp = "^3.9.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

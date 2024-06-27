@@ -9,6 +9,9 @@ from .constants import DEFAULT_CARD_IMAGE_PATH, DEFAULT_POST_IMAGE
 
 
 class Post(CreateModel):
+    message_id = models.IntegerField(
+        verbose_name='id телеграм сообщения'
+    )
     user = models.ForeignKey(
         User,
         verbose_name='Пользователь',
@@ -18,10 +21,14 @@ class Post(CreateModel):
     title = models.CharField(
         verbose_name='Название',
         max_length=32,
-        validators=[MinLengthValidator(5)]
+        validators=[MinLengthValidator(5)],
+        default='Название',
+        blank=True,
+        null=True,
     )
     description = models.CharField(
         verbose_name='Описание',
+        default='Описание',
         blank=True,
         null=True,
         max_length=255
@@ -30,7 +37,8 @@ class Post(CreateModel):
         verbose_name='Цена',
         max_digits=10,
         decimal_places=2,
-        validators=[MinValueValidator(Decimal('0.00'))]
+        validators=[MinValueValidator(Decimal('0.00'))],
+        default=Decimal('0')
     )
     image = models.CharField(
         'эмодзи поста',

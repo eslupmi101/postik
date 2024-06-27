@@ -4,21 +4,22 @@ from django.contrib.auth import login
 from django.contrib.sessions.backends.db import SessionStore
 from django.contrib.sessions.models import Session
 from django.shortcuts import resolve_url
-from rest_framework import status
+from rest_framework import mixins, status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .serailizers import PostCreateSerializer, TelegramProfileSerializer
+from posts.models import Post
 from users.models import TelegramProfile, User
-
-from .permissions import AuthTelegramCheckPermission, BotTokenPermission
-from .serailizer import TelegramProfileSerializer
+from .permissions import (AuthTelegramCheckPermission,
+                          BotHandlerTokenPermission, BotTokenPermission)
 
 
 class BotManagerAuthView(APIView):
     permission_classes = (BotTokenPermission,)
 
     def post(self, request, *args, **kwargs):
-        '''
+        """
         Create or get user and save telegram_id in session.
 
         Bot manager send django session_id of user
@@ -26,7 +27,7 @@ class BotManagerAuthView(APIView):
 
         Combine telegram and session data to authorize or register a user.
         Save the telegram ID in the session
-        '''
+        """
         # validate session_id
         instance_session_key = Session.objects.filter(session_key=request.data['session_id'])
         if not instance_session_key.exists():
@@ -95,3 +96,10 @@ class AuthTelegramCheckView(APIView):
             },
             status=status.HTTP_302_FOUND
         )
+
+
+class PostCreateViewSet(mixins.CreateModelMixin,
+                        viewsets.GenericViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostCreateSerializer
+    permission_classes = (BotHandlerTokenPermission,)

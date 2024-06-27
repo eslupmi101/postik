@@ -9,7 +9,8 @@
   {% include 'dashboards/includes/sidebar.html' %}
   <section class="design-tab-inner">
     <div class="frame-parent24">
-      <form class="frame-wrapper13">
+      <div class="frame-wrapper13">
+      <form>
         {% csrf_token %}
         <div class="frame-parent25">
           <div class="frame-parent26">
@@ -33,17 +34,19 @@
               <div class="parent9">
                 <a>Аватарка</a>
                 <div class="input-wrapper">
-                  <input
-                    class="input2"
-                    type="file"
-                    name="avatar"
-                    accept="image/*"
-                    hx-post="{% url 'dashboards:update_card' %}"
-                    hx-trigger="change"
-                    hx-target=".image-44-wrapper"
-                    hx-boost="true"
-                    hx-encoding="multipart/form-data"
-                  />
+                  <div class="input2">
+                    <input
+                      class="input-ava"
+                      type="file"
+                      name="avatar"
+                      accept="image/*"
+                      hx-post="{% url 'dashboards:update_card' %}"
+                      hx-trigger="change"
+                      hx-target=".image-44-wrapper"
+                      hx-boost="true"
+                      hx-encoding="multipart/form-data"
+                    />
+                  </div>
                 </div>
               </div>
               <a>Название</a>
@@ -76,42 +79,41 @@
               </div>
             </div>
           </div>
-          <div class="parent10">
-            <div class="div40">Посты</div>
-            <div
-              class="card-posts"
-              hx-trigger="updateCardPosts from:body"
-              hx-get="{% url 'dashboards:card-posts' %}"
-              hx-swap="innerHTML">
-              {% include 'dashboards/design/card-posts.html' %}
-            </div>
-            
-          </div>
-          <button
-            type="button"
-            class="input7 input8 28"
-            hx-get={% url 'dashboards:modal-posts' %}
-            hx-target="body"
-            hx-swap="beforeend"
-          >
-            Добавить
-          </button>
-          <div>
-            <button
-              class="input7 input8 28"
-              hx-post="{% url 'dashboards:save_card' %}"
-              hx-vals='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'
-              hx-target="#message"
-              hx-target=".image-44-wrapper"
-              onkeydown="if (event.key === 'Enter') this.blur();"
-            >
-              Сохранить
-            </button>
-          </div>
-          <div id="message">
-          </div>
         </div>
       </form>
+      <div class="parent10">
+        <div class="div40">Посты</div>
+          <div
+            class="card-posts"
+            hx-trigger="updateCardPosts from:body"
+            hx-get="{% url 'dashboards:card-posts' %}"
+            hx-swap="innerHTML">
+            {% include 'dashboards/design/card-posts.html' %}
+          </div>
+      </div>
+      <button
+        type="button"
+        class="input7 input8 28"
+        hx-get={% url 'dashboards:modal-posts' %}
+        hx-target="body"
+        hx-swap="beforeend"
+      >
+        Добавить
+      </button>
+      <div>
+        <button
+          class="input7 input8 28"
+          hx-post="{% url 'dashboards:save_card' %}"
+          hx-vals='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'
+          hx-target="#message"
+          hx-target=".image-44-wrapper"
+          onkeydown="if (event.key === 'Enter') this.blur();"
+        >
+          Сохранить
+        </button>
+      </div>
+      <div id="message"></div>
+      </div>
       <div
         class="parent15"
         hx-trigger="updateCardPosts from:body"

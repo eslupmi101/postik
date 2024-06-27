@@ -170,6 +170,7 @@
   max-width: 100%;
 }
 .input2 {
+  position: relative;
   width: 440px;
   border-radius: var(--br-5xs);
   background-color: var(--color-white);
@@ -178,7 +179,26 @@
   flex-direction: row;
   padding: var(--padding-4xs) 0 var(--padding-4xs) var(--padding-sm);
   white-space: nowrap;
+  height: 35px;
 }
+
+.input-ava {
+  position: absolute;
+  top: 50%;
+  left: -1px;
+  transform: translateY(-50%);
+}
+
+.input-ava::file-selector-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  height: 35px;
+  cursor: pointer;
+}
+
 .frame-parent26,
 .input-container,
 .parent9 {
@@ -263,6 +283,7 @@
   z-index: 2;
 }
 .div42 {
+  resize: none;
   width: 238px;
   font-size: var(--font-size-3xs);
   letter-spacing: -0.05em;
@@ -278,6 +299,7 @@
   padding: 0 var(--padding-xl) 0 0;
   box-sizing: border-box;
   gap: 0.6px;
+  border: none !important;
 }
 .div43,
 .div44 {
@@ -307,6 +329,7 @@
 }
 .input-child {
   flex-direction: column;
+  width: 60px;
   padding: var(--padding-xs) 0 0;
   box-sizing: border-box;
 }
@@ -321,7 +344,15 @@
   gap: 9.9px;
   max-width: 100%;
   z-index: 1;
+  
 }
+
+.input4 * {
+  border-radius: 6px;
+  border: solid 1px #ABABAB;
+}
+
+
 .input-parent {
   position: relative;
   width: 400px;
@@ -435,6 +466,7 @@
   width: 440px;
 }
 .input7 {
+  margin-top: 12px;
   align-self: stretch;
   width: 440px;
   border-radius: var(--br-5xs);
@@ -473,6 +505,7 @@
   gap: 20px;
 }
 .parent10 {
+  margin-top: 12px;
   width: 444px;
   overflow-x: auto;
   padding: 0 var(--padding-9xs) 0 0;
@@ -601,7 +634,6 @@
 }
 
 .card-posts {
-  margin-top: 20px;
   gap: 24px;
   display: flex;
   flex-direction: column;
@@ -735,6 +767,11 @@
   align-items: flex-start;
   justify-content: flex-start;
   position: relative;
+
+}
+
+.posts-add-list .input4 * {
+  border: none;
 }
 
 .post-add {

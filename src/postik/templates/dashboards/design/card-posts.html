@@ -1,25 +1,24 @@
 {% load static %}
 {% for post in card.posts %}
-  <div class="input-parent">
-    <div class="post-id">№ {{ post.id }}</div>
-    <form class="input4">
-      {% csrf_token %}
-      <input
-        class="input-inner parent11 div41"
-        value="{{ post.image }}"
-        type="text"
-        name="image"
-        hx-post="{% url 'dashboards:update_post' post_id=post.id %}"
-        hx-trigger="change"
-        hx-target=".image-44-wrapper"
-        onkeydown="if (event.key === 'Enter') this.blur();"
-      />
-      <div class="parent12">
+<div class="input-parent">
+  <div class="post-id">№ {{ post.id }}</div>
+  <form class="input4">
+    {% csrf_token %}
+    <input
+      class="input-inner parent11 div41"
+      value="{{ post.image }}"
+      type="text"
+      name="image"
+      hx-post="{% url 'dashboards:update_post' post_id=post.id %}"
+      hx-trigger="change"
+      hx-target=".image-44-wrapper"
+      onkeydown="if (event.key === 'Enter') this.blur();"
+      maxlength="1"
+    />
+    <div class="parent12">
       <input
         class="b26"
         value="{{ post.title }}"
-        rows="1"
-        cols="35"
         type="text"
         name="title"
         hx-post="{% url 'dashboards:update_post' post_id=post.id %}"
@@ -27,29 +26,28 @@
         hx-target=".image-44-wrapper"
         onkeydown="if (event.key === 'Enter') this.blur();"
       />
-      <textarea
-        class="div42"
-        rows="4"
-        cols="50"
-        type="text"
-        name="description"
-        hx-post="{% url 'dashboards:update_post' post_id=post.id %}"
-        hx-vals='{"description": this.value, "post_id": "{{ post.id }}"}'
-        hx-trigger="change"
-        hx-target=".image-44-wrapper"
-        onkeydown="if (event.key === 'Enter') this.blur();"
-      >{{ post.description }}</textarea>
-      </div>
-      <input
-        class="input-child"
-        value="{{ post.price }}"
-        type="text"
-        name="price"
-        hx-post="{% url 'dashboards:update_post' post_id=post.id %}"
-        hx-trigger="change"
-        hx-target=".image-44-wrapper"
-        onkeydown="if (event.key === 'Enter') this.blur();"
-      />
-    </form>
-  </div>
+        <textarea
+          class="div42"
+          rows="4"
+          cols="50"
+          name="description"
+          hx-post="{% url 'dashboards:update_post' post_id=post.id %}"
+          hx-vals='{"description": this.value, "post_id": "{{ post.id }}"}'
+          hx-trigger="change"
+          hx-target=".image-44-wrapper"
+          onkeydown="if (event.key === 'Enter') this.blur();"
+        >{{ post.description }}</textarea>
+    </div>
+    <input
+      class="input-child"
+      value="{{ post.price }}"
+      type="text"
+      name="price"
+      hx-post="{% url 'dashboards:update_post' post_id=post.id %}"
+      hx-trigger="change"
+      hx-target=".image-44-wrapper"
+      onkeydown="if (event.key === 'Enter') this.blur();"
+    />
+  </form>
+</div>
 {% endfor %}
