@@ -2,16 +2,14 @@ from rest_framework.permissions import BasePermission
 from django.conf import settings
 
 
-class BotTokenPermission(BasePermission):
+class BotManagerTokenPermission(BasePermission):
     def has_permission(self, request, *_):
-        bot_token = request.headers.get('Bot-Token')
-        return bot_token == settings.BOT_MANAGER_TOKEN
+        return request.headers.get('Bot-Token') == settings.BOT_MANAGER_TOKEN
 
 
 class BotHandlerTokenPermission(BasePermission):
     def has_permission(self, request, *_):
-        bot_token = request.headers.get('Bot-Token')
-        return bot_token == settings.BOT_HANDLER_TOKEN
+        return request.headers.get('Bot-Token') == settings.BOT_HANDLER_TOKEN
 
 
 class AuthTelegramCheckPermission(BasePermission):

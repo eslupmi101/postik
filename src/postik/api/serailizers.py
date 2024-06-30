@@ -26,3 +26,17 @@ class PostCreateSerializer(serializers.ModelSerializer):
             telegram_profile__telegram_id=validated_data.pop('telegram_id')
         )
         return Post.objects.create(user=user, **validated_data)
+
+
+class PostPurchaseSerializer(serializers.ModelSerializer):
+    telegram_id = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Post
+        fields = [
+            'id', 'message_id', 'telegram_id', 'title', 'description', 'price'
+        ]
+        read_only_fields = fields
+
+    def get_telegram_id(self, obj):
+        return obj.user.telegram_profile.telegram_id

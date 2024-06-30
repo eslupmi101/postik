@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Card, CardPost
+from .models import Post, PostPurchase, Card, CardPost
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -22,5 +22,15 @@ class CardAdmin(admin.ModelAdmin):
     inlines = [CardPostInline]
 
 
+class PostPurchaseAdmin(admin.ModelAdmin):
+    list_display = ('post', 'user', 'created_at')
+    list_filter = ('post', 'user')
+    search_fields = ('post__title', 'user__username')
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('post', 'user')
+
+
 admin.site.register(Post, PostAdmin)
+admin.site.register(PostPurchase, PostPurchaseAdmin)
 admin.site.register(Card, CardAdmin)

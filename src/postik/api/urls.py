@@ -6,8 +6,16 @@ from . import views
 app_name = 'api'
 
 router = DefaultRouter()
-
-router.register('posts', views.PostCreateViewSet)
+router.register(
+    'posts',
+    views.PostCreateViewSet,
+    basename='posts'
+)
+router.register(
+    'posts/purchase',
+    views.PostPurchaseViewSet,
+    basename='posts_purchase'
+)
 
 
 urlpatterns = [

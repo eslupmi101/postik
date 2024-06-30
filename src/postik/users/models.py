@@ -10,7 +10,7 @@ User = get_user_model()
 class TelegramProfile(models.Model):
     user = models.OneToOneField(
         User,
-        verbose_name='user',
+        verbose_name='пользователь',
         related_name='telegram_profile',
         db_index=True,
         on_delete=models.CASCADE
@@ -25,20 +25,20 @@ class TelegramProfile(models.Model):
         max_length=255
     )
     image = models.ImageField(
-        verbose_name='Изображение',
+        verbose_name='изображение',
         upload_to='telegram_profiles',
         default=DEFAULT_IMAGE_PATH
     )
     bio = models.CharField(
-        verbose_name='Био',
+        verbose_name='био',
         max_length=255,
         blank=True,
         null=True
     )
 
     class Meta:
-        verbose_name = 'telegram profile'
-        verbose_name_plural = 'telegram profiles'
+        verbose_name = 'telegram профиль'
+        verbose_name_plural = 'telegram профили'
 
     def __str__(self):
-        return f'{self.username} ({self.user})'
+        return f'{self.telegram_id}'

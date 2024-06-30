@@ -3,20 +3,22 @@ import logging
 from django.contrib.auth import login
 from django.contrib.sessions.backends.db import SessionStore
 from django.contrib.sessions.models import Session
-from django.shortcuts import resolve_url
+from django.shortcuts import get_object_or_404, resolve_url
 from rest_framework import mixins, status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serailizers import PostCreateSerializer, TelegramProfileSerializer
 from posts.models import Post
 from users.models import TelegramProfile, User
 from .permissions import (AuthTelegramCheckPermission,
-                          BotHandlerTokenPermission, BotTokenPermission)
+                          BotHandlerTokenPermission,
+                          BotManagerTokenPermission,)
+from .serailizers import (PostCreateSerializer, PostPurchaseSerializer,
+                          TelegramProfileSerializer)
 
 
 class BotManagerAuthView(APIView):
-    permission_classes = (BotTokenPermission,)
+    permission_classes = (BotManagerTokenPermission,)
 
     def post(self, request, *args, **kwargs):
         """
@@ -103,3 +105,22 @@ class PostCreateViewSet(mixins.CreateModelMixin,
     queryset = Post.objects.all()
     serializer_class = PostCreateSerializer
     permission_classes = (BotHandlerTokenPermission,)
+
+
+class PostPurchaseViewSet(mixins.ListModelMixin,
+                          mixins.RetrieveModelMixin,
+                          viewsets.GenericViewSet):
+    serializer_class = PostPurchaseSerializer
+    permission_classes = (BotHandlerTokenPermission,)
+
+    def get_queryset(self):
+        telegram_profile = get_object_or_404(
+            TelegramProfile.objects.select_related('user'),
+            telegram_id=self.request.headers.get('telegram-id')
+        )
+
+        posts = Post.objects.filter(
+            post_purchases__user=telegram_profile.user
+        ).prefetch_related('post_purchases')
+
+        return posts

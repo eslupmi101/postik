@@ -1,11 +1,9 @@
-from decimal import Decimal
-
 from django.db import models
-from django.core.validators import MinLengthValidator, MinValueValidator
+from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 
 from core.models import CreateModel
 from users.models import User
-from .constants import DEFAULT_CARD_IMAGE_PATH, DEFAULT_POST_IMAGE
+from .constants import DEFAULT_CARD_IMAGE_PATH, DEFAULT_POST_IMAGE, MAX_POST_PRICE
 
 
 class Post(CreateModel):
@@ -14,31 +12,32 @@ class Post(CreateModel):
     )
     user = models.ForeignKey(
         User,
-        verbose_name='Пользователь',
+        verbose_name='пользователь',
         related_name='posts',
         on_delete=models.CASCADE
     )
     title = models.CharField(
-        verbose_name='Название',
+        verbose_name='название',
         max_length=32,
         validators=[MinLengthValidator(5)],
-        default='Название',
+        default='название',
         blank=True,
         null=True,
     )
     description = models.CharField(
-        verbose_name='Описание',
-        default='Описание',
+        verbose_name='описание',
+        default='описание',
         blank=True,
         null=True,
         max_length=255
     )
-    price = models.DecimalField(
-        verbose_name='Цена',
-        max_digits=10,
-        decimal_places=2,
-        validators=[MinValueValidator(Decimal('0.00'))],
-        default=Decimal('0')
+    price = models.IntegerField(
+        verbose_name='цена',
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(MAX_POST_PRICE)
+        ],
+        default=0
     )
     image = models.CharField(
         'эмодзи поста',
@@ -46,7 +45,7 @@ class Post(CreateModel):
         default=DEFAULT_POST_IMAGE
     )
     is_active = models.BooleanField(
-        verbose_name='Активность',
+        verbose_name='активность',
         default=True
     )
 
@@ -61,25 +60,25 @@ class Post(CreateModel):
 class Card(CreateModel):
     user = models.ForeignKey(
         User,
-        verbose_name='Пользователь',
+        verbose_name='пользователь',
         related_name='cards',
         on_delete=models.CASCADE
     )
     title = models.CharField(
-        verbose_name='Название',
+        verbose_name='название',
         max_length=32,
         validators=[MinLengthValidator(5)],
-        default='Название'
+        default='название'
     )
     description = models.CharField(
-        verbose_name='Описание',
+        verbose_name='описание',
         blank=True,
         null=True,
         max_length=255,
-        default='Описание'
+        default='описание'
     )
     image = models.ImageField(
-        verbose_name='Изображение',
+        verbose_name='изображение',
         upload_to='cards',
         default=DEFAULT_CARD_IMAGE_PATH
     )
@@ -89,7 +88,7 @@ class Card(CreateModel):
         related_name='cards'
     )
     is_active = models.BooleanField(
-        verbose_name='Активность',
+        verbose_name='активность',
         default=True
     )
 
@@ -98,7 +97,7 @@ class Card(CreateModel):
         verbose_name_plural = 'карточки'
 
     def __str__(self):
-        return f'Карта {self.id}: {self.title}'
+        return f'карта {self.id}: {self.title}'
 
 
 class CardPost(models.Model):
@@ -122,3 +121,25 @@ class CardPost(models.Model):
 
     def __str__(self):
         return f'{self.card.title} - {self.post.title}'
+
+
+class PostPurchase(CreateModel):
+    post = models.ForeignKey(
+        Post,
+        verbose_name='пост',
+        related_name='post_purchases',
+        on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User,
+        verbose_name='пользователь',
+        related_name='post_purchases',
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        unique_together = ('post', 'user')
+        verbose_name = 'купленный пост'
+        verbose_name_plural = 'купленные посты'
+
+    def __str__(self):
+        return f'{self.user.username} купил {self.post.title}'

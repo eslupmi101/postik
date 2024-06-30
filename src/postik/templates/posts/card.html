@@ -74,7 +74,7 @@
             >
               <div class="div6">Добавить в корзину</div>
             </button>
-            {% elif post.id in cart.posts %}
+            {% elif post.id in cart.posts_id %}
               <button
                 class="rectangle-container"
                 hx-post="{% url 'posts:post_cart' card_id=card.id post_id=post.id %}"
@@ -108,10 +108,9 @@
   </div>
   <div class="frame-wrapper1">
     <div class="buy-button-parent">
-      <button class="buy-button">
-        <div class="button"></div>
+      <a href={% url 'posts:buy_posts' card_id=card.id %} class="buy-button">
         <b class="b7">Оплатить</b>
-      </button>
+      </a>
       <div class="frame-wrapper2">
         <div class="powered-by-parent">
           <div class="powered-by">powered by</div>
