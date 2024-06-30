@@ -32,7 +32,7 @@ class PostStates(StatesGroup):
 
 
 @dp.message(CommandStart(deep_link=True))
-async def start_handler(message: types.Message, command: CommandObject):
+async def start_handler_purchased_posts(message: types.Message, command: CommandObject):
     if len(command.args.split(',')):
         post_ids = command.args.split(',')
 
@@ -50,16 +50,18 @@ async def start_handler(message: types.Message, command: CommandObject):
                     f'Не удалось получить детали для поста с ID: {post_id}'
                 )
 
-        await message.answer(
-            'Привет, это Postik! Нажмите кнопку ниже, чтобы отправить или посмотреть купленные посты.',
-            reply_markup=MAIN_KB
-        )
+    await message.answer(
+        'Привет, это Postik! Нажмите кнопку ниже, чтобы отправить или посмотреть купленные посты.',
+        reply_markup=MAIN_KB
+    )
 
-    else:
-        await message.answer(
-            'Привет, это Postik! Нажмите кнопку ниже, чтобы отправить или посмотреть посты.',
-            reply_markup=MAIN_KB
-        )
+
+@dp.message(CommandStart())
+async def start_handler(message: types.Message):
+    await message.answer(
+        'Привет, это Postik! Нажмите кнопку ниже, чтобы отправить или посмотреть купленные посты.',
+        reply_markup=MAIN_KB
+    )
 
 
 @dp.message(F.text == 'Отправить пост')
