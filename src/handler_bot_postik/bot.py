@@ -33,9 +33,7 @@ class PostStates(StatesGroup):
 
 @dp.message(CommandStart(deep_link=True))
 async def start_handler(message: types.Message, command: CommandObject):
-    print(command.args)
-    # Извлечение списка ID постов из параметра start
-    if command.args:
+    if len(command.args.split(',')):
         post_ids = command.args.split(',')
 
         for post_id in post_ids:
