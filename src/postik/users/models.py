@@ -42,3 +42,22 @@ class TelegramProfile(models.Model):
 
     def __str__(self):
         return f'{self.telegram_id}'
+
+
+class BotAccessToken(models.Model):
+    token = models.CharField(
+        verbose_name='токен',
+        max_length=255,
+    )
+    bot_name = models.CharField(
+        verbose_name='Имя телеграм бота',
+        max_length=255,
+        unique=True
+    )
+
+    class Meta:
+        verbose_name = 'Токен доступа телеграм бота'
+        verbose_name_plural = 'Токены доступа телеграм бота'
+
+    def __str__(self):
+        return f'Токен доступа: {self.bot_name}'

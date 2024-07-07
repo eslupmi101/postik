@@ -104,11 +104,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
-BOT_MANAGER_TOKEN = os.getenv('BOT_MANAGER_TOKEN')
-
 BOT_MANAGER_NAME = os.getenv('BOT_MANAGER_NAME')
-
-BOT_HANDLER_TOKEN = os.getenv('BOT_HANDLER_TOKEN')
 
 BOT_HANDLER_NAME = os.getenv('BOT_HANDLER_NAME')
 

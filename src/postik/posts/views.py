@@ -35,13 +35,7 @@ def post_card(request, card_id, post_id):
     if str(card_id) not in request.session.get('carts', {}):
         HttpResponseNotFound('Cart not found')
 
-    if (
-        post_id not in request.session['carts'][str(card_id)]['posts_id']
-        and not PostPurchase.objects.filter(
-            post=post_id,
-            user=request.user.id
-        ).exists()
-    ):
+    if post_id not in request.session['carts'][str(card_id)]['posts_id']:
         posts_id = set(request.session['carts'][str(card_id)]['posts_id'])
         posts_id.add(post_id)
         request.session['carts'][str(card_id)]['posts_id'] = list(posts_id)
@@ -77,7 +71,6 @@ def buy_posts(request, card_id):
     request.session['carts'][str(card_id)]['posts_id'] = []
     request.session.modified = True
 
-    print(get_telegram_purchased_posts_link(posts_id))
     return redirect(
         get_telegram_purchased_posts_link(posts_id)
     )

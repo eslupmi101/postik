@@ -129,6 +129,7 @@
   display: inline-block;
   min-width: 24px;
   z-index: 1;
+  font-size: var(--font-size-5xl);
 }
 .container,
 .icon,
@@ -926,7 +927,7 @@
   background-color: #f28482;
   padding: 10px;
   list-style-type: none;
-  margin: 0;g
+  margin: 0;
   width: 100%; /* Ensure dropdown width matches container */
 }
 

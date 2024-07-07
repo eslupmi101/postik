@@ -7,8 +7,9 @@ from .constants import DEFAULT_CARD_IMAGE_PATH, DEFAULT_POST_IMAGE, MAX_POST_PRI
 
 
 class Post(CreateModel):
-    message_id = models.IntegerField(
-        verbose_name='id телеграм сообщения'
+    message_id = models.CharField(
+        max_length=255,
+        verbose_name='id телеграм сообщения в MongoDB'
     )
     user = models.ForeignKey(
         User,
@@ -137,7 +138,6 @@ class PostPurchase(CreateModel):
     )
 
     class Meta:
-        unique_together = ('post', 'user')
         verbose_name = 'купленный пост'
         verbose_name_plural = 'купленные посты'
 

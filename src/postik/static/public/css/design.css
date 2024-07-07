@@ -241,12 +241,14 @@
 }
 .div41 {
   position: absolute;
-  left: 6px;
+  left: 100px;
   display: inline-block;
   width: 21px;
   height: 28px;
   min-width: 21px;
   z-index: 2;
+  border-radius: 6px;
+  border: solid 1px #ABABAB;
 }
 .frame-child9 {
   position: absolute;
@@ -276,19 +278,27 @@
   font-size: var(--font-size-lg);
   color: var(--color-black);
 }
-.b26,
+.b26 {
+  padding: 10px;
+  width: 200px;
+  border-radius: 6px;
+  border: solid 1px #ABABAB;
+}
 .div42 {
+  padding: 10px;
   align-items: flex-start;
   position: relative;
   z-index: 2;
-}
-.div42 {
   resize: none;
-  width: 238px;
+  width: 350px;
+  height: 60px;
   font-size: var(--font-size-3xs);
   letter-spacing: -0.05em;
   color: var(--color-darkslategray-200);
   display: inline-block;
+  border-radius: 6px;
+  border: solid 1px #ABABAB;
+  overflow-y: hidden;
 }
 .parent12 {
   width: 307.7px;
@@ -320,7 +330,6 @@
   align-self: stretch;
   position: relative;
 }
-.input-child,
 .input-parent,
 .input4 {
   display: flex;
@@ -328,37 +337,25 @@
   justify-content: flex-start;
 }
 .input-child {
-  flex-direction: column;
-  width: 60px;
-  padding: var(--padding-xs) 0 0;
-  box-sizing: border-box;
+  padding: 10px;
+  width: 80px;
+  border-radius: 6px;
+  border: solid 1px #ABABAB;
 }
 .input-parent,
 .input4 {
-  flex-direction: row;
+  flex-direction: column;
 }
 .input4 {
   flex: 1;
   box-sizing: border-box;
-  padding: var(--padding-6xs) var(--padding-xs) var(--padding-8xs);
-  gap: 9.9px;
   max-width: 100%;
   z-index: 1;
-  
 }
-
-.input4 * {
-  border-radius: 6px;
-  border: solid 1px #ABABAB;
-}
-
 
 .input-parent {
   position: relative;
   width: 400px;
-  border: 1px solid var(--color-darkgray);
-  border-radius: var(--br-5xs);
-  background-color: white;
 }
 .input5 {
   align-self: stretch;
@@ -613,6 +610,44 @@
   border-width: 0.5px;
 }
 
+.card-posts {
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  width: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #ABABAB;;
+  padding: 15px;
+  border-radius: 10px;
+  min-width: 400px
+}
+
+.post-id {
+  font-family: "TRIAL Factor A Bold";
+  margin-top: 10px;
+  top: -18px;
+}
+
+.post-input-label {
+  padding-top: 6px;
+  padding-bottom: 2px;
+  font-family: "TRIAL Factor A Regular";
+  border: none;
+}
+
+.input-image {
+  position: absolute;
+  text-align: center;
+  font-size: var(--font-size-lg);
+  color: var(--color-black);
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: solid 1px #ABABAB;
+}
+
 
 @media screen and (max-width:1350px) {
   .design-tab {
@@ -631,30 +666,6 @@
     align-items: center;
     flex-wrap: nowrap;
   }
-}
-
-.card-posts {
-  gap: 24px;
-  display: flex;
-  flex-direction: column;
-  max-height: 90vh;
-  width: auto;
-  overflow-y: auto;
-  overflow-x: hidden;
-  border: 1px solid black;
-  padding: 15px;
-  padding-top: 25px;
-  border-radius: 10px;
-  min-width: 400px
-}
-
-.post-id {
-  position: absolute;
-  font-family: "TRIAL Factor A Regular";
-  color: #ABABAB;
-  font-size: 12px;
-  top: -18px;
-  left: 4px;
 }
 
 /***** MODAL DIALOG ****/
@@ -757,22 +768,23 @@
 }
 
 .posts-add-list {
+  position: relative;
   padding-top: 25px;
   overflow-x: hidden;
   overflow-y: auto;
+  align-items: column;
   display: inline-flex;
   gap: 25px;
   word-wrap: break-word;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  position: relative;
-
 }
 
-.posts-add-list .input4 * {
-  border: none;
+.post-add-id {
+  font-family: "TRIAL Factor A Bold";
 }
+
 
 .post-add {
   position: relative;

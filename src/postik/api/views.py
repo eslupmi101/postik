@@ -119,8 +119,6 @@ class PostPurchaseViewSet(mixins.ListModelMixin,
             telegram_id=self.request.headers.get('telegram-id')
         )
 
-        posts = Post.objects.filter(
+        return Post.objects.filter(
             post_purchases__user=telegram_profile.user
-        ).prefetch_related('post_purchases')
-
-        return posts
+        ).distinct().prefetch_related('post_purchases')

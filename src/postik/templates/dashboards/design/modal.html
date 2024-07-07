@@ -8,22 +8,49 @@
       {% csrf_token %}
       {% for post in posts %}
         {% if post.id in card.id_selected_posts %}
+          <div class="post-add-id">№ {{ post.id }}</div>
           <button
-            class="post-add_choosen"
+            class="frame-parent2"
             hx-post="{% url 'dashboards:modal-posts' %}"
             hx-vals='{"post_id": "{{ post.id }}", "csrfmiddlewaretoken": "{{ csrf_token }}"}'
             hx-target=".posts-add-list"
             hx-swap="innerHTML"
             type="button">
-            <div class="post-id">№ {{ post.id }}</div>
-            <div class="input4">
-              <div class="parent11">{{ post.image }}</div>
-              <div class="parent12">
-                <b class="b26">{{ post.title }}</b>
-                <div class="div42">{{ post.description }}</div>
+            <div class="icon-wrapper">
+              <div class="icon">
+                <div class="icon-child"></div>
+                  <img
+                    class="icon-item"
+                    loading="lazy"
+                    alt=""
+                    src={% static '/public/images/card/telegram-icon.svg' %}
+                  />
+                <div class="container">
+                  <div class="div2">{{ post.image }}</div>
+                </div>
               </div>
-              <div class="input-child">{{ post.price }}₽</div>
             </div>
+          
+            <div class="frame-parent3">
+              <div class="parent">
+                <b class="b">{{ post.title }}</b>
+                <div class="frame">
+                  <div class="div3">
+                    {{ post.description }}
+                  </div>
+                </div >
+              </div>
+            </div>
+          </button>
+              <div class="post-add-id">№ {{ post.id }}</div>
+              <div class="input4">
+                <div class="parent11">{{ post.image }}</div>
+                <div class="parent12">
+                  <b class="b26">{{ post.title }}</b>
+                  <div class="div42">{{ post.description }}</div>
+                </div>
+                <div class="input-child">{{ post.price }}₽</div>
+              </div>
           </button>
         {% else %}
           <button

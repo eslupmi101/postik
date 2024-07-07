@@ -1,9 +1,8 @@
-from decimal import Decimal
-
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
 from django.views.decorators.http import require_POST
+from django.views.decorators.cache import never_cache
 
 from posts.models import Card, Post
 from posts.serializers import PostSerializer
@@ -16,6 +15,7 @@ from .utils.images import convert_to_base64, convert_from_base64
 
 # Design page
 @login_required(login_url='users:signup')
+@never_cache
 def design(request):
     if 'card' not in request.session:
         card = Card.objects.get_or_create(user=request.user)[0]
@@ -32,13 +32,16 @@ def design(request):
             'id_selected_posts': []
         }
         request.session['card'] = card_data
+    from .forms import PostForm
+    form_post = PostForm()
 
     context = {
         'title': 'Дизайн',
         'card': request.session['card'],
-        'is_preview': True
+        'is_preview': True,
+        'form_post': form_post,
     }
-    return render(request, 'dashboards/design.html', context)
+    return render(request, 'dashboards/design/design.html', context)
 
 
 @login_required(login_url='users:signup')
@@ -105,7 +108,6 @@ def update_card(request):
 
     request.session['card'] = session_card
     request.session.modified = True
-    print(session_card['image'])
 
     context = {
         'title': 'Дизайн',
@@ -140,8 +142,7 @@ def update_post(request, post_id):
         post.description = request.POST.get('description')
 
     if request.POST.get('price'):
-        print(request.POST.get('price'))
-        post.price = Decimal(request.POST.get('price'))
+        post.price = int(request.POST.get('price'))
 
     post.save()
 

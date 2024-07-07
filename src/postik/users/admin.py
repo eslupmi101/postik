@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import TelegramProfile
+from .models import BotAccessToken, TelegramProfile
 
 
 class TelegramProfileAdmin(admin.ModelAdmin):
@@ -10,4 +10,10 @@ class TelegramProfileAdmin(admin.ModelAdmin):
     readonly_fields = ('telegram_id',)
 
 
+class BotAccessTokenAdmin(admin.ModelAdmin):
+    list_display = ('bot_name', 'token')
+    search_fields = ('bot_name',)
+
+
+admin.site.register(BotAccessToken, BotAccessTokenAdmin)
 admin.site.register(TelegramProfile, TelegramProfileAdmin)

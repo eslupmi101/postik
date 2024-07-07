@@ -17,6 +17,7 @@ load_dotenv()
 
 TOKEN = os.getenv('BOT_MANAGER_TOKEN')
 API_URL = os.getenv('API_URL')
+BOT_MANAGER_ACCESS_TOKEN = os.getenv('BOT_MANAGER_ACCESS_TOKEN')
 
 dp = Dispatcher()
 
@@ -28,7 +29,7 @@ async def send_auth_request(
 ) -> tuple[str, dict]:
     """Send auth or registration request to backend api."""
     headers = {
-        'Bot-Token': TOKEN
+        'Bot-Token': BOT_MANAGER_ACCESS_TOKEN
     }
     payload = {
         'session_id': session_id,
