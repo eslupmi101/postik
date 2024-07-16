@@ -19,7 +19,6 @@ flake8 = "^7.0.0"
 django-tailwind = "^3.8.0"
 django-browser-reload = "^1.13.0"
 emoji = "^2.12.1"
-django-compressor = "^4.5"
 
 [build-system]
 requires = ["poetry-core"]
