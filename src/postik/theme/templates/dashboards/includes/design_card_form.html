@@ -1,0 +1,46 @@
+{% load static %}
+{% load tailwind_tags %}
+<form
+  class="mb-5"
+  method="POST"
+  hx-post="{% url 'dashboards:update_card' %}"
+  hx-swap="innerHTML"
+  hx-target="#design-card-form"
+>
+  {% csrf_token %}
+  {% for field in form_card %}
+    <div class="block mb-2">
+      <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
+      {{ field }}
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <div style="color: red;" class="text-red-500 text-sm">{{ error|escape }}</div>
+        {% endfor %}
+      {% endif %}
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">{{ field.help_text }}</p>
+    </div>
+  {% endfor %}
+  
+  {% if form_card.non_field_errors %}
+    <div class="alert alert-danger">
+      {% for error in form_card.non_field_errors %}
+        <div>{{ error|escape }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <button
+    type="submit"
+    class="bg-black text-white py-2 px-4 border border-blue-700 rounded"
+  >
+    Сохранить карту
+  </button>
+</form>
+<!-- Trigger for update card-->
+<span
+  class="hidden"
+  hx-trigger="load"
+  hx-get="{% url 'dashboards:preview_card' %}"
+  hx-swap="innerHTML"
+  hx-target="#design-card-preview"
+/>

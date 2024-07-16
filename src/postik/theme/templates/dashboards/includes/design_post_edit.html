@@ -1,0 +1,68 @@
+{% load static %}
+{% load tailwind_tags %}
+<div class="border border-4 border-black p-2">
+  <form
+    method="POST"
+    hx-post="{% url 'dashboards:edit_post' post_id=form_post.instance.id %}"
+    hx-swap="innerHTML"
+    hx-target="#accordion-open-body-{{ form_post.instance.id }}"
+  >
+    {% csrf_token %}
+    <div class="block mb-5">
+      <label for="emoji_picker" class="block mb-2 text-sm font-medium">{{ form_post.image.label }}</label>
+      <div class="emojipicker-container">
+        <input
+          id="emoji_picker"
+          class="border border-gray-300 rounded-lg"
+          style="width: 45px; margin-bottom: 20px;"
+          value="{{ form_post.instance.image }}"
+          type="text"
+          name="image"
+          readonly
+        />
+      </div>
+    </div>
+
+    <div class="block mb-2">
+      <label for="{{ form_post.title.id_for_label }}" class="block mb-0 text-sm font-medium">{{ form_post.title.label }}</label>
+      {{ form_post.title }}
+      {% if form_post.title.errors %}
+        <div style="color: red;" class="text-red-500 text-xs md:text-sm">{{ form_post.title.errors }}</div>
+      {% endif %}
+      <p class="mt-1 text-xs md:text-sm text-gray-500" id="file_input_help">{{ form_post.title.help_text }}</p>
+    </div>
+
+    <div class="block mb-2">
+      <label for="{{ form_post.title.id_for_label }}" class="block mb-0 text-sm font-medium">{{ form_post.description.label }}</label>
+      {{ form_post.description }}
+      {% if form_post.description.errors %}
+        <div style="color: red;" class="text-red-500 text-xs md:text-sm">{{ form_post.description.errors }}</div>
+      {% endif %}
+      <p class="mt-1 text-xs md:text-sm text-gray-500" id="file_input_help">{{ form_post.description.help_text }}</p>
+    </div>
+
+    <div class="block mb-2">
+      <label for="{{ form_post.price.id_for_label }}" class="block mb-0 text-sm font-medium">{{ form_post.price.label }}</label>
+      {{ form_post.price }}
+      {% if form_post.price.errors %}
+        <div style="color: red;" class="text-red-500 text-xs md:text-sm">{{ form_post.price.errors }}</div>
+      {% endif %}
+      <p class="mt-1 text-xs md:text-sm text-gray-500" id="file_input_help">{{ form_post.price.help_text }}</p>
+    </div>
+    
+    <button type="submit" class="bg-black text-white py-2 px-4 border border-blue-700 rounded">
+      Сохранить пост
+    </button>
+    <button
+      type="button"
+      class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded text-sm px-5 py-2.5 me-2 mb-2"
+      hx-get="{% url 'dashboards:view_post_body' post_id=form_post.instance.id %}"
+      hx-trigger="click"
+      hx-swap="innerHTML"
+      hx-target="#accordion-open-body-{{ form_post.instance.id }}"
+    >
+      Отмена
+    </button>
+  </form>
+</div>
+<script src={% static 'public/js/emoji.js' %}></script>

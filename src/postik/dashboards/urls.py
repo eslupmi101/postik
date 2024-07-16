@@ -6,14 +6,12 @@ app_name = 'dashboards'
 
 
 urlpatterns = [
-    path('design/', views.design, name='design'),
-    path('design/update_card/', views.update_card, name='update_card'),
-    path('design/modal-posts/', views.modal_posts, name='modal-posts'),
-    path('design/update-post/<int:post_id>/', views.update_post, name='update_post'),
-    path('design/save-card/', views.save_card, name='save_card'),
-
-    path('design/card-posts', views.card_posts, name='card-posts'),
-    path('design/preview_card', views.preview_card, name='preview_card'),
-
-    path('connect/', views.connect, name='connect'),
+    path('design/', views.DesignPageView.as_view(), name='design'),
+    path('design/update-card/', views.update_card, name='update_card'),
+    path('design/view-post/<int:post_id>/', views.view_post, name='view_post'),
+    path('design/view-post-body/<int:post_id>/', views.view_post_body, name='view_post_body'),
+    path('design/view-post-heading/<int:post_id>/', views.view_post_heading, name='view_post_heading'),
+    path('design/view-posts-list/', views.view_posts_list, name='view_posts_list'),
+    path('design/edit-post/<int:post_id>/', views.edit_post, name='edit_post'),
+    path('design/preview-card/', views.preview_card, name='preview_card'),
 ]

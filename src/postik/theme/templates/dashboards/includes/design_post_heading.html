@@ -1,0 +1,16 @@
+{% load static %}
+{% load tailwind_tags %}
+<div class="break-words text-black flex items-center w-full">
+  <div class="w-8 h-8 p-1 mr-2 shrink-0 border-2 rounded-lg">
+    {{ post.image }}
+  </div>
+  <div class="w-5 mr-5 text-sm md:text-base flex-grow text-left">
+    {{ post.title }}
+  </div>
+  <div class="font-bold text-sm md:text-base text-right text-black inter-semibold ml-10">
+    {{ post.price }}₽
+  </div>
+</div>          
+<svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+</svg>

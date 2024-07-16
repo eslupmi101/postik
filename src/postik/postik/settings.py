@@ -27,6 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'tailwind',
+    'compressor',
+    # Tailwind app
+    'theme',
+    # Browser-reload for development
+    'django_browser_reload',
 ]
 
 MIDDLEWARE = [
@@ -37,6 +43,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Browser-reload for development
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 
@@ -45,7 +53,7 @@ ROOT_URLCONF = 'postik.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['theme/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,11 +102,20 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATIC_ROOT = '/var/www/html/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+# Compressor
+COMPRESS_ROOT = BASE_DIR / 'static'
+
+COMPRESS_ENABLED = True
+
+STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -112,3 +129,18 @@ BOT_HANDLER_NAME = os.getenv('BOT_HANDLER_NAME')
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Tailwind
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+    'localhost',
+]
+
+TAILWIND_DEV_MODE = True
+
+# Auth
+LOGIN_URL = 'users:signup'
+
+LOGIN_REDIRECT_URL = 'posts:index'

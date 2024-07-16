@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load static tailwind_tags %}
+{% block extra_header %}
+<section class="flex h-screen">
+  <!-- Левая колонка -->
+  <div id="separator-sidebar" class="hidden sm:flex sm:w-1/2 h-screen bg-black flex items-center justify-center w-display" aria-label="Sidebar">
+    <img src={% static '/public/images/logo-cloud.svg' %} alt="Logo" />
+  </div>
+  
+  <!-- Правая колонка -->
+  <div class="flex flex-1 justify-center items-center">
+    <div class="grid grid-rows-2 items-center justify-center w-full max-w-lg mx-auto">
+      <div class="flex flex-row w-full justify-center items-end h-full">
+        <div class="relative size-[12rem] flex items-center justify-center">
+          {{ auth_qr_code_svg|safe }}
+          <div class="absolute -bottom-0 -left-16 size-24">
+            <img class="absolute w-16 h-16 z-30" style="bottom: 24px;" alt="Утка" src={% static '/public/images/duck-auth.gif' %}/>
+            <img class="absolute bottom-1 w-16 h-16 z-10" alt="Стул утки" src={% static '/public/images/duck-chair.svg' %}>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-black font-factor-a-regular max-w-80">
+        <h3 class="text-lg font-factor-a-medium">Войти как автор</h3>
+        <span>Отсканируйте QR-код с устройства где установлен</span>
+        <span>Телеграм либо нажмите на кнопку</span>
+        <button>
+          Перейти в телеграм
+        </button>
+        <div class="mt-5 flex justify-center">
+          <a href="{{ telegram_auth_link | safe }}" class="w-1/2 text-white text-xs bg-black hover:bg-gray-700 focus:ring-gray-700 py-3 px-4 rounded focus:outline-none">
+            Перейти в телеграм
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Auth checker -->
+<div id="redirect-checker"
+  hx-get="{% url 'api:auth_telegram_check' %}?next={{ request.GET.next|default:'/' }}"
+  hx-trigger="every 2s"
+  hx-target="#redirect-checker"
+  hx-redirect="true">
+</div>
+{% endblock extra_header %}
+{% block content %}
+{% endblock content%}

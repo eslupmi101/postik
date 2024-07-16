@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load static tailwind_tags %}
+{% block extra_css %}
+<link rel="stylesheet" href={% static '/public/css/index.css' %} />
+{% endblock %}
+{% block extra_header %}
+  {% include "includes/index_header.html" %}
+{% endblock extra_header %}
+{% block content %}
+<section class="mx-auto">
+  <div class="text-center mt-32">
+      <h1 class="text-center mb-4 text-4xl font-factor-a-bold leading-none tracking-tight text-gray-900 text-black sm:text-5xl md:text-6xl xl:text-6.5xl">
+        <span class="block">Монетизируй свои</span>
+        <span class="block">
+          посты в 
+          <div class="inline-flex text-white bg-black rounded-lg p-1">
+            Телеграм
+          </div>
+        </span>
+      </h1>
+      <p class="w-2/3 mx-auto text-base text-center mb-6 text-lg font-factor-a-medium text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+        Postik — это инструмент, позволяющий вам зарабатывать на ваших постах
+      </p>
+      <a href="{% url 'dashboards:design' %}" class="mt-6 w-1/3 h-16 inline-flex items-center justify-center px-5 py-3 text-md md:text-xl lg:text-xl text-center text-white bg-black rounded-lg hover:bg-gray-700 focus:ring-gray-700">
+        Начать пользоваться
+      </a>      
+  </div>
+  <div class="mx-auto my-10 w-64 h-64 text-center">
+    <img
+      loading="lazy"
+      alt="Duck is eating messages"
+      src={% static '/public/images/gif/duck-eat-message.gif'  %}
+    />
+  </div>
+  <ul class="max-w-md mx-auto divide-y divide-gray-200 dark:divide-gray-700">
+    <li class="py-3 sm:py-4">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse">
+        <div class="flex-shrink-0">
+          <img class="w-16 h-16" src="{% static '/public/images/gif/duck-sort.gif' %}" alt="Дашборд">
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-lg font-factor-a-bold">Дашборд</p>
+          <p class="text-base font-factor-a-regular">Удобный дашборд со всеми необходимыми вкладками</p>
+        </div>
+      </div>
+    </li>
+    <li class="py-3 sm:py-4">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse">
+        <div class="flex-shrink-0">
+          <img class="w-16 h-16" src="{% static '/public/images/gif/duck-post.gif' %}" alt="Визитка">
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-lg font-factor-a-bold">Визитка</p>
+          <p class="text-base font-factor-a-regular">Вы получаете свою личную сайт-визитку, где можно размещать посты на продажу</p>
+        </div>
+      </div>
+    </li>
+    <li class="py-3 sm:py-4">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse">
+        <div class="flex-shrink-0">
+          <img class="w-16 h-16" src="{% static '/public/images/gif/duck-buy.gif' %}" alt="Оплата">
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-lg font-factor-a-bold">Оплата</p>
+          <p class="text-base font-factor-a-regular">Получайте деньги от продажи постов прямо на карту</p>
+        </div>
+      </div>
+    </li>
+    <li class="py-3 sm:py-4">
+      <div class="flex items-center space-x-4 rtl:space-x-reverse">
+        <div class="flex-shrink-0">
+          <img class="w-16 h-16" src="{% static '/public/images/gif/duck-happy.gif' %}" alt="Без кода">
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-lg font-factor-a-bold">Без кода</p>
+          <p class="text-base font-factor-a-regular">Для создания своей визитки и продажи постов вам не нужно писать ни строчки кода</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>
+{% endblock content %}
+{% block extra_footer %}
+  {% include "includes/index_footer.html" %}
+{% endblock extra_footer %}

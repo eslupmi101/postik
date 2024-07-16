@@ -1,9 +1,11 @@
+from django.core.validators import (MaxValueValidator, MinLengthValidator,
+                                    MinValueValidator)
 from django.db import models
-from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 
 from core.models import CreateModel
 from users.models import User
-from .constants import DEFAULT_CARD_IMAGE_PATH, DEFAULT_POST_IMAGE, MAX_POST_PRICE
+from .constants import (DEFAULT_CARD_IMAGE_PATH, DEFAULT_POST_IMAGE,
+                        MAX_POST_PRICE)
 
 
 class Post(CreateModel):
@@ -80,7 +82,7 @@ class Card(CreateModel):
     )
     image = models.ImageField(
         verbose_name='изображение',
-        upload_to='cards',
+        upload_to='cards/',
         default=DEFAULT_CARD_IMAGE_PATH
     )
     posts = models.ManyToManyField(

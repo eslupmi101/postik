@@ -11,8 +11,7 @@ from rest_framework.views import APIView
 from posts.models import Post
 from users.models import TelegramProfile, User
 from .permissions import (AuthTelegramCheckPermission,
-                          BotHandlerTokenPermission,
-                          BotManagerTokenPermission,)
+                          BotHandlerTokenPermission, BotManagerTokenPermission)
 from .serailizers import (PostCreateSerializer, PostPurchaseSerializer,
                           TelegramProfileSerializer)
 

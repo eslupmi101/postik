@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotFound
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .models import Card, PostPurchase
 from .serializers import CardSerializer
@@ -13,18 +13,8 @@ def index(request):
 
 def card(request, card_id):
     card = get_object_or_404(Card, pk=card_id)
-    if 'cart' not in request.session:
-        request.session['carts'] = {}
-
-    if str(card.id) not in request.session['carts']:
-        request.session['carts'][str(card.id)] = {
-            'posts_id': []
-        }
-    request.session.modified = True
     context = {
-        'card': CardSerializer(card).data,
-        'cart': request.session['carts'][str(card.id)],
-        'image': card.image,
+        'card': card,
     }
     return render(request, 'posts/card.html', context)
 

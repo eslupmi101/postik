@@ -37,4 +37,4 @@ def get_telegram_auth_link(request) -> str:
 
     session_id = request.session.session_key
 
-    return f'https://t.me/{settings.BOT_MANAGER_NAME}?start={session_id}'
+    return f'tg://resolve?domain={settings.BOT_MANAGER_NAME}&start={session_id}'

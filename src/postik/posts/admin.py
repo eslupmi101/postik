@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, PostPurchase, Card, CardPost
+from .models import Card, CardPost, Post, PostPurchase
 
 
 class PostAdmin(admin.ModelAdmin):

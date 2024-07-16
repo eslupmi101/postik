@@ -1,0 +1,9 @@
+{% load static %}
+{% load static tailwind_tags %}
+<div id="accordion-open" data-accordion="open">
+  {% for post in card.posts.all %}
+    <div id="design-post-{{ post.id }}">
+      {% include "dashboards/includes/design_post.html"%}
+    </div>
+  {% endfor %}
+</div>

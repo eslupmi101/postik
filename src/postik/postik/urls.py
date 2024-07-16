@@ -9,6 +9,8 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('dashboards/', include('dashboards.urls')),
     path('api/v1/', include('api.urls')),
+    # Browser-reload for development
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
 
 if settings.DEBUG:

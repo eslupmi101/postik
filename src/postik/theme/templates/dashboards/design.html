@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load static tailwind_tags %}
+{% block extra_header %}
+  {% include "includes/sidebar.html" %}
+{% endblock extra_header %}
+{% block extra_css%}
+<link rel="stylesheet" type="text/css" href="{% static 'public/css/emoji.css' %}" />
+{% endblock %}
+{% block content %}
+<div class="p-4 sm:ml-64 mx-auto px-4">
+  <div class="grid h-full grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="rounded border-dashed rounded-lg">
+      <h1 class="font-factor-a-bold text-2xl">Дизайн</h2>
+      <span class="mb-5 font-factor-a-regular text-gray-900 text-xs">Добавьте логотип, название, описание и посты в вашу карточку</span>
+      <div id="design-card-form">
+        {% include "dashboards/includes/design_card_form.html" %}
+      </div>
+      <label for="description" class="block mb-2 text-xl font-factor-a-medium text-gray-900">Посты</label>
+      <div id="design-posts">
+        {% include "dashboards/includes/design_posts_list.html" %}
+      </div>
+    </div>
+    <div>
+      <h1 class="font-factor-a-bold text-2xl">Предпросмотр</h2>
+      <div id="design-card-preview" class="mt-2 border-2 rounded-lg">
+        {% include "includes/card_body.html" %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

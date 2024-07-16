@@ -1,7 +1,7 @@
 from django import forms
 
-from posts.models import Card, Post
 from posts.constants import MAX_POST_PRICE
+from posts.models import Card, Post
 
 
 class CardForm(forms.ModelForm):
