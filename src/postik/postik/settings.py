@@ -17,6 +17,8 @@ ALLOWED_HOSTS = [
     'postik.tech',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://postik.tech']
+
 INSTALLED_APPS = [
     'posts',
     'users',
