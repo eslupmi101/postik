@@ -28,7 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'tailwind',
-    'compressor',
     # Tailwind app
     'theme',
     # Browser-reload for development
@@ -104,18 +103,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/var/www/html/'
+# Prod
+STATIC_ROOT = '/var/www/html'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-
-# Compressor
-COMPRESS_ROOT = BASE_DIR / 'static'
-
-COMPRESS_ENABLED = True
-
-STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
+# ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
