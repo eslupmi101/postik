@@ -12,7 +12,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'localhost',
+    'postik.tech',
+]
 
 INSTALLED_APPS = [
     'posts',
@@ -103,11 +106,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR / 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# STATICFILES_DIRS = [
-#     ,
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+    # '/var/www/static'
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
