@@ -1,5 +1,6 @@
 import logging
 
+from django.db.models import Q
 from django.contrib.auth import login
 from django.contrib.sessions.backends.db import SessionStore
 from django.contrib.sessions.models import Session
@@ -105,6 +106,11 @@ class PostCreateViewSet(mixins.CreateModelMixin,
     serializer_class = PostCreateSerializer
     permission_classes = (BotHandlerTokenPermission,)
 
+    def perform_create(self, serializer):
+        post = serializer.save()
+        post.title = f'Пост №{post.id}'
+        post.save()
+
 
 class PostPurchaseViewSet(mixins.ListModelMixin,
                           mixins.RetrieveModelMixin,
@@ -119,5 +125,6 @@ class PostPurchaseViewSet(mixins.ListModelMixin,
         )
 
         return Post.objects.filter(
-            post_purchases__user=telegram_profile.user
+            # Owner's posts and purchased posts
+            Q(user=telegram_profile.user) | Q(post_purchases__user=telegram_profile.user)
         ).distinct().prefetch_related('post_purchases')

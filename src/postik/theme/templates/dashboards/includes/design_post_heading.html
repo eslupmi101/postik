@@ -1,8 +1,12 @@
 {% load static %}
 {% load tailwind_tags %}
 <div class="break-words text-black flex items-center w-full">
-  <div class="w-8 h-8 p-1 mr-2 shrink-0 border-2 rounded-lg">
-    {{ post.image }}
+  {% if not post in card.posts.all %}
+  <div class="flex justify-center items-center text-center w-8 h-8 p-1 mr-2 border-2 rounded-lg"> 
+  {% else %}
+  <div class="flex justify-center items-center text-center w-8 h-8 p-1 mr-2 border-2 border-black rounded-lg"> 
+  {% endif %}
+    <p>{{ post.image }}</p>
   </div>
   <div class="w-5 mr-5 text-sm md:text-base flex-grow text-left">
     {{ post.title }}

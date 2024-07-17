@@ -1,4 +1,5 @@
 import logging
+import re
 
 from aiogram import Bot, Dispatcher, F, types
 from aiogram.client.default import DefaultBotProperties
@@ -37,23 +38,46 @@ class PostStates(StatesGroup):
 
 
 @dp.message(CommandStart(deep_link=True))
-async def start_handler_purchased_posts(message: types.Message, command: CommandObject):
-    if len(command.args.split(',')):
-        message_ids = command.args.split(',')
+async def start_handler_purchased_posts(message: types.Message, command: CommandObject, state: FSMContext):
+    # Create post event
+    if command.args == 'create_post':
+        await message.answer(
+            'Чтобы создать пост, отправьте одно сообщение или перешлите сюда сообщение'
+        )
+        await state.set_state(PostStates.sending)
+        return
 
-        for message_id in message_ids:
-            status, post_details = await get_post_details(message.from_user.id, message_id)
+    if view_post_match := re.match(r"view_post_(\d+)", command.args):
+        post_id = view_post_match.group(1)
+        telegram_id = message.from_user.id
+        status, post_details = await get_post_details(telegram_id, post_id)
 
-            if status == 200:
-                await send_post_user(
-                    message.bot,
-                    message.from_user.id,
-                    post_details
-                )
-            else:
-                await message.answer(
-                    f'Не удалось получить детали для поста с ID: {message_id}'
-                )
+        if not post_details or status != 200:
+            await message.answer('Произошла ошибка при получении деталей поста.')
+            return
+
+        await send_post_user(
+            message.bot,
+            message.from_user.id,
+            post_details
+        )
+
+    # if len(command.args.split(',')):
+    #   message_ids = command.args.split(',')
+
+    #    for message_id in message_ids:
+    #        status, post_details = await get_post_details(message.from_user.id, message_id)
+    #
+    #        if status == 200:
+    #            await send_post_user(
+    #                message.bot,
+    #                message.from_user.id,
+    #                post_details
+    #            )
+    #        else:
+    #            await message.answer(
+    #                f'Не удалось получить детали для поста с ID: {message_id}'
+    #            )
 
     await message.answer(
         'Привет, это Postik! Нажмите кнопку ниже, чтобы отправить или посмотреть купленные посты.',
@@ -133,7 +157,7 @@ async def post_message_handler(message: types.Message, state: FSMContext):
     )
     if status == 201:
         post_id = data['id']
-        await message.answer(f'Ваш пост под номером {post_id} был успешно сохранен.')
+        await message.answer(f'Ваш пост под названием "Пост №{post_id}" был успешно сохранен.')
     else:
         logger.error(
             'Error sending message-post to backend - %s',

@@ -112,6 +112,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
+    BASE_DIR / 'theme/static'
     # '/var/www/static'
 ]
 
@@ -141,4 +142,4 @@ TAILWIND_DEV_MODE = True
 # Auth
 LOGIN_URL = 'users:signup'
 
-LOGIN_REDIRECT_URL = 'posts:index'
+LOGIN_REDIRECT_URL = 'dashboards:design'

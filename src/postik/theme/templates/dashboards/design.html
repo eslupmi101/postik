@@ -16,8 +16,16 @@
       <div id="design-card-form">
         {% include "dashboards/includes/design_card_form.html" %}
       </div>
-      <label for="description" class="block mb-2 text-xl font-factor-a-medium text-gray-900">Посты</label>
-      <div id="design-posts">
+      <p class="block text-xl font-factor-a-medium text-gray-900">Посты</p>
+      <div>
+        <p class="text-sm">
+          Посты создаются через телеграм бота @postik_handler_bot
+        </p>
+        <div class="block mt-3 mb-2">
+          <a href={{ telegram_create_post_link }} class="text-white bg-black hover:bg-gray-700 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 focus:outline-none">Создать пост</a>
+        </div>
+      </div>
+      <div id="design-posts" class="mt-5">
         {% include "dashboards/includes/design_posts_list.html" %}
       </div>
     </div>

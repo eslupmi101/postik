@@ -7,7 +7,7 @@ from .utils import generate_qr_code_svg, get_telegram_auth_link
 
 def auth_view(request):
     if request.user.is_authenticated:
-        return redirect(reverse('posts:index'))
+        return redirect(reverse('dashboards:design'))
 
     telegram_auth_link = get_telegram_auth_link(request)
     auth_qr_code_svg = generate_qr_code_svg(telegram_auth_link)

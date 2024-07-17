@@ -13,5 +13,7 @@ urlpatterns = [
     path('design/view-post-heading/<int:post_id>/', views.view_post_heading, name='view_post_heading'),
     path('design/view-posts-list/', views.view_posts_list, name='view_posts_list'),
     path('design/edit-post/<int:post_id>/', views.edit_post, name='edit_post'),
+    path('design/delete-post-card/<int:post_id>/', views.delete_post_card, name='delete_post_card'),
+    path('design/add-post-card/<int:post_id>/', views.add_post_card, name='add_post_card'),
     path('design/preview-card/', views.preview_card, name='preview_card'),
 ]

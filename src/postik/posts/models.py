@@ -103,7 +103,7 @@ class Card(CreateModel):
         return f'карта {self.id}: {self.title}'
 
 
-class CardPost(models.Model):
+class CardPost(CreateModel):
     card = models.ForeignKey(
         Card,
         verbose_name='карточка',
@@ -121,6 +121,7 @@ class CardPost(models.Model):
         verbose_name = 'карточка-пост'
         verbose_name_plural = 'карточки-посты'
         unique_together = ('card', 'post',)
+        ordering = ['created_at']
 
     def __str__(self):
         return f'{self.card.title} - {self.post.title}'
