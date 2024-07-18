@@ -52,6 +52,18 @@
     >
       Редактировать пост
     </button>
+    <button
+      type="button"
+      style="background-color: red;"
+      class="block focus:outline-none text-white hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded text-sm px-5 py-2.5 me-2 my-2"
+      hx-get="{% url "dashboards:remove_post" post_id=post.id %}"
+      hx-trigger="click"
+      hx-swap="innerHTML"
+      hx-target="#design-post-{{ post.id }}"
+      enctype="multipart/form-data"
+    >
+      Удалить пост
+    </button>
     {% if is_success_edit %}
       <div class="block text-xs pb-3 mb-3">
         Пост успешно сохранен!

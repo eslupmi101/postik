@@ -91,7 +91,7 @@ class AuthTelegramCheckView(APIView):
         del request.session['telegram_id']
         request.session.modified = True
 
-        next_url = request.GET.get('next', 'posts:index')
+        next_url = request.GET.get('next', 'dashboards:design')
         return Response(
             headers={
                 'HX-Redirect': resolve_url(next_url)
@@ -102,7 +102,7 @@ class AuthTelegramCheckView(APIView):
 
 class PostCreateViewSet(mixins.CreateModelMixin,
                         viewsets.GenericViewSet):
-    queryset = Post.objects.all()
+    queryset = Post.objects.filter(is_active=True)
     serializer_class = PostCreateSerializer
     permission_classes = (BotHandlerTokenPermission,)
 
@@ -126,5 +126,6 @@ class PostPurchaseViewSet(mixins.ListModelMixin,
 
         return Post.objects.filter(
             # Owner's posts and purchased posts
-            Q(user=telegram_profile.user) | Q(post_purchases__user=telegram_profile.user)
+            Q(user=telegram_profile.user) | Q(post_purchases__user=telegram_profile.user),
+            is_active=True
         ).distinct().prefetch_related('post_purchases')

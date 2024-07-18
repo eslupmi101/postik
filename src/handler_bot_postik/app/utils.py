@@ -1,9 +1,6 @@
 import logging
 
-from aiogram import Bot
-from aiogram.exceptions import TelegramAPIError, TelegramUnauthorizedError
 from aiogram.types import Message
-from aiogram.utils.media_group import MediaGroupBuilder
 
 logger = logging.getLogger(__name__)
 

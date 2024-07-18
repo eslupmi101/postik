@@ -15,5 +15,8 @@ urlpatterns = [
     path('design/edit-post/<int:post_id>/', views.edit_post, name='edit_post'),
     path('design/delete-post-card/<int:post_id>/', views.delete_post_card, name='delete_post_card'),
     path('design/add-post-card/<int:post_id>/', views.add_post_card, name='add_post_card'),
+    
+    path('design/remove-post/<int:post_id>/', views.remove_post, name='remove_post'),
+    
     path('design/preview-card/', views.preview_card, name='preview_card'),
 ]
