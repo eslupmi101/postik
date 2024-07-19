@@ -5,7 +5,7 @@ from django.db import models
 from core.models import CreateModel
 from users.models import User
 from .constants import (DEFAULT_CARD_IMAGE_PATH, DEFAULT_POST_IMAGE,
-                        MAX_POST_PRICE)
+                        MIN_POST_PRICE, MAX_POST_PRICE)
 
 
 class Post(CreateModel):
@@ -37,10 +37,10 @@ class Post(CreateModel):
     price = models.IntegerField(
         verbose_name='цена',
         validators=[
-            MinValueValidator(0),
+            MinValueValidator(MIN_POST_PRICE),
             MaxValueValidator(MAX_POST_PRICE)
         ],
-        default=0
+        default=MIN_POST_PRICE
     )
     image = models.CharField(
         'эмодзи поста',

@@ -30,7 +30,7 @@ class BotManagerAuthView(APIView):
         Combine telegram and session data to authorize or register a user.
         Save the telegram ID in the session
         """
-        # validate session_id
+        # Validate session_id
         instance_session_key = Session.objects.filter(session_key=request.data['session_id'])
         if not instance_session_key.exists():
             return Response(

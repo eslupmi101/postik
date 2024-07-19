@@ -3,11 +3,11 @@
 <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
   <span class="sr-only">Открыть боковую панель</span>
   <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-    <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+  <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
   </svg>
 </button>
 
-<aside id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+<aside id="separator-sidebar" class="fixed h-full top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
   <div class="flex flex-col justify-between h-full py-4 overflow-y-auto bg-black text-white">
     <ul class="space-y-2 font-medium">
       <li class="flex justify-center">
@@ -28,25 +28,28 @@
             disabled
             readonly
           >
-          <button
-            data-copy-to-clipboard-target="card-url-copy-button"
-            data-tooltip-target="tooltip-copy-card-url-copy-button"
-            style="right: 10px;"
-            class="absolute right-0 h-8 text-gray-500 hover:bg-gray-100 rounded-lg p-2 inline-flex items-center justify-center"
-          >
-            <svg
-              class="w-4 h-4"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 18 20"
+            <button
+              data-copy-to-clipboard-target="card-url-copy-button"
+              data-tooltip-target="tooltip-copy-card-url-copy-button"
+              style="margin-left: 5px;"
+              class="h-8 text-gray-500 hover:bg-gray-100 rounded-lg p-2 inline-flex items-center justify-center"
             >
-              <path
-                d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"
-              />
-            </svg>
-          </button>
-          </input>        
+              <svg
+                class="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 18 20"
+              >
+                <path
+                  d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"
+                />
+              </svg>
+            </button>
+          </input>
+          <div id="tooltip-copy-card-url-copy-button" role="tooltip" class="relative z-30 invisible inline-block px-3 py-2 text-sm text-red transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+            <span id="default-tooltip-message" class="bg-black text-center border border-white rounded-lg px-2 py-1">Скопировать ссылку на карточку</span>
+          </div>    
         </div>
       </li>
       <li>
@@ -80,14 +83,9 @@
           class="relative ml-5 w-10 h-10 z-20"
           loading="lazy"
           alt="Утка читает новости"
-          src="{% static '/public/images/dashboard/side-bar/duck-news.svg' %}">
-        <img
-          class="absolute bottom-1 left-4"
-          alt=""
-          src="{% static '/public/images/dashboard/side-bar/lounge-chair.svg' %}"
-        />
-      </img>
-    </li>
-  </ul>
-</div>
+          src="{% static '/public/images/dashboard/side-bar/duck-news.svg' %}"
+        >
+      </li>
+    </ul>
+  </div>
 </aside>

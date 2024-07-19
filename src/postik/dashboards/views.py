@@ -20,7 +20,9 @@ class DesignPageView(TemplateView):
         card = Card.objects.get_or_create(
             user=self.request.user
         )[0]
-        card_url = self.request.build_absolute_uri(resolve_url('posts:card', card.id))
+        card_url = self.request.build_absolute_uri(
+            resolve_url('posts:card', card.user.telegram_profile.username)
+        )
 
         user_posts = Post.objects.filter(
             user=self.request.user,

@@ -11,8 +11,8 @@ def index(request):
     return render(request, 'posts/index.html')
 
 
-def card(request, card_id):
-    card = get_object_or_404(Card, pk=card_id)
+def card(request, telegram_username):
+    card = get_object_or_404(Card, user__telegram_profile__username=telegram_username)
     context = {
         'card': card,
     }

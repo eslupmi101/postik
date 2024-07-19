@@ -1,12 +1,12 @@
 {% load static %}
 {% load static tailwind_tags %}
-<div>
+<div style="width: 450px;" class="mx-auto bg-white px-5 rounded-lg border-2 border-gray-300 shadow-lg min-w-96">
   <div class="flex flex-col items-center justify-center text-center">
     <img class="my-10 size-32 border-2 border-black rounded-full" style="border-radius: 50%;" src="{{ card.image.url }}" alt="Изображение карточки">
-    <p class="text-2xl font-semibold inter-semibold block w-1/3 break-words">
+    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-2xl inter-semibold block w-1/2 break-words">
       {{ card.title }}
-    </p>
-    <p class="text-gray-500 text-md block w-1/2 break-words mt-1 mb-6">
+    </h1>
+    <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-500 text-md block w-3/4 break-words mt-1 mb-6">
       {{ card.description }}
     </p>
   </div>
@@ -22,47 +22,52 @@
             {{ post.image }}
           </div>
           <div class="flex-1 min-w-0 mt-3">
-            <p class="text-sm md:text-lg text-gray-900 truncate">
+            <p class="text-sm md:text-base lg:text-lg text-gray-900 truncate">
               {{ post.title }}
             </p>
-            <div class="text-xs md:text-sm text-gray-500 dark:text-gray-400">
-              <p id="short-description-{{ post.id }}" class="break-words">
-                {{ post.description|truncatechars:32 }}
-              </p>
-              <p id="full-description-{{ post.id }}" class="hidden break-words">
-                {{ post.description }}
-              </p>
-            </div>
-            <button
-              id="toggle-button-{{ post.id }}"
-              class="text-sm text-blue-500 hover:underline mb-2"
-              onclick="toggleDescription('{{ post.id }}')">
-              Больше
-            </button>
-            <button
-              type="button"
-              class="block text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded text-xs px-2 py-2 md:px-5 md:py-2.5 me-2 mb-2">
-              Добавить в корзину
-            </button>
+            {% if post.description|length > 32 %}
+              <div class="text-sm sm:text-base text-gray-500">
+                <p id="short-description-{{ post.id }}" class="break-words">
+                  {{ post.description|truncatechars:32 }}
+                </p>
+                <p id="full-description-{{ post.id }}" class="hidden break-words">
+                  {{ post.description }}
+                </p>
+              </div>
+              <button
+                id="toggle-button-{{ post.id }}"
+                class="text-sm text-blue-500 hover:underline mb-2"
+                onclick="toggleDescription('{{ post.id }}')">
+                Больше
+              </button>
+            {% else %}
+              <div class="text-xs md:text-sm lg:text-base text-gray-500">
+                <p class="break-words">
+                  {{ post.description }}
+                </p>
+              </div>
+            {% endif %}
           </div>
           <div class="flex flex-col items-start space-y-2 ml-5 mt-5">
-            <div class="text-3xl font-factor-a-bold">
+            <div class="text-lg sm:text-xl md:text-2xl font-factor-a-bold">
               {{ post.price }}₽
             </div>
           </div>
         </div>
       </li>
+      <button
+        type="button"
+        class="mb-5 block text-white bg-gray-800 text-xs md:text-sm lg:text-base hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded px-2 py-2 md:px-5 md:py-2.5 me-2 mb-2">
+        Купить пост
+      </button>
       {% endfor %}
     </ul>
   </div>
-  <button class="w-1/2 text-center text-xl flex items-center justify-center self-center mx-auto bg-black text-white my-4 py-2 px-4 border border-blue-700 rounded">
-    Оплатить
-  </button>
-  <div class="flex justify-center items-center mt-5 mb-5 py-5">
+  <div class="flex justify-center items-center mt-5 py-5">
     <p class="inter-semibold mr-2">powered by</p>
     <img
       loading="lazy"
-      alt=""
+      alt="Postik"
       src="{% static 'public/images/card/logo-card.svg' %}"
     />
   </div>
