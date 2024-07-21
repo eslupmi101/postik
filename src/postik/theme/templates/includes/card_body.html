@@ -1,11 +1,12 @@
 {% load static %}
 {% load static tailwind_tags %}
-<div class="m-5 sm:mx-2 w-full sm:w-[42rem] bg-white rounded-2xl shadow-lg">
+<div class="md:mx-5 w-full sm:w-[42rem] bg-white rounded-2xl shadow-lg">
   <div class="flex flex-col items-center justify-center text-center p-6">
     <img
-      class="lazyload my-10 w-44 h-44 border-2 border-black rounded-full"
-      src="{{ card.image.url }}" alt="Изображение карточки"
       loading="lazy"
+      style="width: 192px; height: 192px;"
+      class="lazyload object-cover my-10 size-48 border-2 border-black rounded-full"
+      data-src="{{ card.image.url }}" alt="Изображение карточки"
     >
     <h1 class="text-3xl md:text-4xl factor-a-bold font-semibold block w-2/3 break-words">
       {{ card.title }}
@@ -14,7 +15,7 @@
       {{ card.description }}
     </p>
   </div>
-  <div class="flow-root mx-12">
+  <div class="flow-root mx-3 sm:mx-12 md:mx-12">
     <ul role="list" class="divide-y divide-gray-200">
       {% for post in card.posts.all %}
       <li class="py-3">
@@ -49,7 +50,7 @@
               </div>
             {% endif %}
           </div>
-          <div class="flex flex-col items-start space-y-2 ml-5 mt-5">
+          <div class="flex flex-col items-start space-y-2 ml-2">
             <p class="block factor-a-bold font-bold text-2xl md:text-3xl">
               {{ post.price }}₽
             </p>

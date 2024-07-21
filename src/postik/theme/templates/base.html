@@ -31,6 +31,11 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/97883645" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
+    <script src="{% static "public/js/lazysizes.min.js" %}"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
+    <script async src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+    <script async src="https://unpkg.com/htmx.org@1.6.1"></script>
 	</head>
 	<body class="leading-normal tracking-normal">
     <header>
@@ -45,10 +50,5 @@
     {% endblock autonomous_content %}
 		{% block extra_footer%}
 		{% endblock %}
-    <script async src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
-    <script async src="https://unpkg.com/hyperscript.org@0.9.12"></script>
-    <script async src="https://unpkg.com/htmx.org@1.6.1"></script>
-    <script async src="https://cdn.tailwindcss.com"></script>
-    <script async src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
 	</body>
 </html>
