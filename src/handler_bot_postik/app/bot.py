@@ -59,7 +59,7 @@ async def start_handler_purchased_posts(message: types.Message, command: Command
                 f'Ваш пост решили купить\n\n'
                 f'Пост: <b>{post_title} {post_price}₽</b>\n'
                 f'Номер заявки: {lead_id}'
-                f'Покупатель: {sibscriber_username}'
+                f'Покупатель: @{sibscriber_username}'
             )
             await bot_manager.send_message(
                 data['author_telegram_id'],
