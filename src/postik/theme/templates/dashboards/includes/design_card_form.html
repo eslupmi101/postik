@@ -4,7 +4,7 @@
   {% csrf_token %}
   
   <div class="block mb-4">
-    <label for="{{ form_card.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form_card.label }}</label>
+    <label for="{{ form_card.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">{{ form_card.label }}</label>
     <input
       id="file_input"
       name="image"
@@ -24,7 +24,7 @@
   </div>
 
   <div class="block mb-4">
-    <label for="{{ form_card.title.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form_card.title.label }}</label>
+    <label for="{{ form_card.title.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">{{ form_card.title.label }}</label>
     {{ form_card.title }}
     {% if form_card.title.errors %}
       <div class="text-red-500 text-sm mt-1">
@@ -33,11 +33,11 @@
         {% endfor %}
       </div>
     {% endif %}
-    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">{{ form_card.title.help_text }}</p>
+    <p class="mt-1 text-sm text-gray-500">{{ form_card.title.help_text }}</p>
   </div>
 
   <div class="block mb-4">
-    <label for="{{ form_card.description.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form_card.description.label }}</label>
+    <label for="{{ form_card.description.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">{{ form_card.description.label }}</label>
     {{ form_card.description }}
     {% if form_card.description.errors %}
       <div class="text-red-500 text-sm mt-1">
@@ -46,7 +46,7 @@
         {% endfor %}
       </div>
     {% endif %}
-    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">{{ form_card.description.help_text }}</p>
+    <p class="mt-1 text-sm text-gray-500">{{ form_card.description.help_text }}</p>
   </div>
 
   {% if form_card.non_field_errors %}

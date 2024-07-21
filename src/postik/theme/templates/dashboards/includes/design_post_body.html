@@ -10,7 +10,7 @@
   </p>
   <div class="flex items-center space-x-2 mb-2">
     <img src="{% static "public/images/card/telegram-icon.svg" %}" alt="Иконка телеграм">
-    <a href="tg://resolve?domain={{ bot_handler_name }}&start=view_post_{{ post.id }}" class="text-blue-600 dark:text-blue-500 hover:underline">Открыть пост в телеграме</a>
+    <a href="tg://resolve?domain={{ bot_handler_name }}&start=view_post_{{ post.id }}" class="text-blue-600 hover:underline">Открыть пост в телеграме</a>
   </div>
   {% if not post in card.posts.all %}
     <button
