@@ -5,7 +5,6 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandObject, CommandStart
-from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
@@ -44,21 +43,22 @@ async def start_handler_purchased_posts(message: types.Message, command: Command
             logger.debug('Create lead of post %s: %s. %s', post_id, status, data)
             post_title = data['post_details']['title']
             post_price = data['post_details']['price']
-            post_description = data['post_details']['description']
             lead_id = data['id']
 
             await message.answer(
-                'Привет, это Postik!\n'
-                f'Заявка №{lead_id} на покупку поста создана\n\n'
-                f'<b>{post_title} {post_price}₽</b>\n'
-                f'{post_description}'
+                'Привет, это POSTIK!\n\n'
+                f'Заявка на покупку поста сформирована\n\n'
+                f'Пост: <b>{post_title} {post_price}₽</b>\n'
+                f'Номер заявки: {lead_id}'
             )
 
             # Отправка лида владельцу
             sibscriber_username = data['subscriber_username']
             message_to_subscriber = (
-                f'Заявка №{lead_id} на покупку поста создана\n'
-                f'<b>{post_title} {post_price}₽</b>\n'
+                'Привет, это POSTIK!\n\n'
+                f'Ваш пост решили купить\n\n'
+                f'Пост: <b>{post_title} {post_price}₽</b>\n'
+                f'Номер заявки: {lead_id}'
                 f'Покупатель: {sibscriber_username}'
             )
             await bot_manager.send_message(
