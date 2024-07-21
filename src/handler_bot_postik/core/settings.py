@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 TOKEN = os.getenv('BOT_HANDLER_TOKEN')
+BOT_MANAGER_TOKEN = os.getenv('BOT_MANAGER_TOKEN')
 CHANNEL_DEVELOP_ID = os.getenv('CHANNEL_DEVELOP_ID')
 API_URL = os.getenv('API_URL')
 BOT_HANDLER_ACCESS_TOKEN = os.getenv('BOT_HANDLER_ACCESS_TOKEN')

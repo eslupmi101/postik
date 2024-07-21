@@ -1,0 +1,26 @@
+{% load static %}
+{% load static tailwind_tags %}
+<form>
+  {% csrf_token %}
+  {% if card.is_active %}
+  <button
+    class="w-full h-12 flex bg-green-500 items-center p-2 px-4 text-white hover:bg-green-200 focus:ring-4 focus:ring-green-600 group"
+    hx-post="{% url "dashboards:unpublish_card" %}"
+    hx-trigger="click"
+    hx-swap="innerHTML"
+    hx-target="#publish_button"
+  >
+    <p class="ms-3 font-light">Карточка опубликована</p>
+  </button>
+  {% else %}
+  <button
+    class="w-full h-12 flex bg-red-500 items-center p-2 px-4 text-white hover:bg-red-200 focus:ring-4 focus:ring-red-600 group"
+    hx-post="{% url "dashboards:publish_card" %}"
+    hx-trigger="click"
+    hx-swap="innerHTML"
+    hx-target="#publish_button"
+  >
+    <p class="ms-3 font-light">Карточка не опубликована</p>
+  </button>
+  {% endif %}
+</form>

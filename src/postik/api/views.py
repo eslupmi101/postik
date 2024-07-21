@@ -14,11 +14,11 @@ from users.models import TelegramProfile, User
 from .permissions import (AuthTelegramCheckPermission,
                           BotHandlerTokenPermission, BotManagerTokenPermission)
 from .serailizers import (PostCreateSerializer, PostPurchaseSerializer,
-                          TelegramProfileSerializer)
+                          TelegramProfileSerializer, LeadSerializer)
 
 
 class BotManagerAuthView(APIView):
-    permission_classes = (BotManagerTokenPermission,)
+    permission_classes = [BotManagerTokenPermission]
 
     def post(self, request, *args, **kwargs):
         """
@@ -76,7 +76,7 @@ class BotManagerAuthView(APIView):
 
 
 class AuthTelegramCheckView(APIView):
-    permission_classes = (AuthTelegramCheckPermission,)
+    permission_classes = [AuthTelegramCheckPermission]
 
     def get(self, request):
         telegram_id = request.session.get('telegram_id')
@@ -92,11 +92,13 @@ class AuthTelegramCheckView(APIView):
         request.session.modified = True
 
         next_url = request.GET.get('next', 'dashboards:design')
+        resolved_url = resolve_url(next_url)
+
         return Response(
             headers={
-                'HX-Redirect': resolve_url(next_url)
+                'HX-Redirect': resolved_url
             },
-            status=status.HTTP_302_FOUND
+            status=status.HTTP_200_OK
         )
 
 
@@ -104,7 +106,7 @@ class PostCreateViewSet(mixins.CreateModelMixin,
                         viewsets.GenericViewSet):
     queryset = Post.objects.filter(is_active=True)
     serializer_class = PostCreateSerializer
-    permission_classes = (BotHandlerTokenPermission,)
+    permission_classes = [BotHandlerTokenPermission]
 
     def perform_create(self, serializer):
         post = serializer.save()
@@ -116,7 +118,7 @@ class PostPurchaseViewSet(mixins.ListModelMixin,
                           mixins.RetrieveModelMixin,
                           viewsets.GenericViewSet):
     serializer_class = PostPurchaseSerializer
-    permission_classes = (BotHandlerTokenPermission,)
+    permission_classes = [BotHandlerTokenPermission]
 
     def get_queryset(self):
         telegram_profile = get_object_or_404(
@@ -129,3 +131,12 @@ class PostPurchaseViewSet(mixins.ListModelMixin,
             Q(user=telegram_profile.user) | Q(post_purchases__user=telegram_profile.user),
             is_active=True
         ).distinct().prefetch_related('post_purchases')
+
+
+class LeadViewSet(mixins.CreateModelMixin,
+                  viewsets.GenericViewSet):
+    serializer_class = LeadSerializer
+    permission_classes = [BotHandlerTokenPermission]
+
+    def perform_create(self, serializer):
+        return serializer.save(author=serializer.validated_data['post'].user)

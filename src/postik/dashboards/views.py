@@ -1,3 +1,5 @@
+import json
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, resolve_url
@@ -61,17 +63,34 @@ def update_card(request):
         instance=card
     )
     if form_card.is_valid():
-        if form_card.cleaned_data.get('image'):
-            card.image = form_card.cleaned_data.get('image')
-            print(123)
-            card.save()
-
         form_card.save()
 
     context = {
         'form_card': form_card
     }
     return render(request, 'dashboards/includes/design_card_form.html', context)
+
+
+@require_POST
+@login_required(login_url='users:signup')
+def publish_card(request):
+    card = get_object_or_404(Card, user=request.user)
+    card.is_active = True
+    context = {
+        'card': card
+    }
+    return render(request, 'includes/publish_button.html', context)
+
+
+@require_POST
+@login_required(login_url='users:signup')
+def unpublish_card(request):
+    card = get_object_or_404(Card, user=request.user)
+    card.is_active = False
+    context = {
+        'card': card
+    }
+    return render(request, 'includes/publish_button.html', context)
 
 
 @login_required(login_url='users:signup')
@@ -118,6 +137,20 @@ def view_posts_list(request):
         'bot_handler_name': settings.BOT_HANDLER_NAME
     }
     return render(request, "dashboards/includes/design_posts_list.html", context)
+
+
+@login_required
+def create_post(request):
+    post = Post.objects.create(user=request.user)
+    post.title = f'Пост №{post.id}'
+    post.save()
+    context = {
+        'post': post,
+        'post_id': post.id
+    }
+    response = render(request, "dashboards/includes/design_post.html", context)
+    response['HX-Trigger'] = json.dumps({'newPostCreated': {'post_id': post.id}})
+    return response
 
 
 @login_required(login_url='users:signup')

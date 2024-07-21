@@ -11,7 +11,9 @@ from .constants import (DEFAULT_CARD_IMAGE_PATH, DEFAULT_POST_IMAGE,
 class Post(CreateModel):
     message_id = models.CharField(
         max_length=255,
-        verbose_name='id телеграм сообщения в MongoDB'
+        verbose_name='id телеграм сообщения в MongoDB',
+        blank=True,
+        null=True,
     )
     user = models.ForeignKey(
         User,
@@ -82,7 +84,7 @@ class Card(CreateModel):
     )
     image = models.ImageField(
         verbose_name='изображение',
-        upload_to='cards/',
+        upload_to='cards',
         default=DEFAULT_CARD_IMAGE_PATH
     )
     posts = models.ManyToManyField(
@@ -146,3 +148,33 @@ class PostPurchase(CreateModel):
 
     def __str__(self):
         return f'{self.user.username} купил {self.post.title}'
+
+
+class Lead(CreateModel):
+    post = models.ForeignKey(
+        Post,
+        verbose_name='пост',
+        related_name='leads',
+        on_delete=models.CASCADE
+    )
+    author = models.ForeignKey(
+        User,
+        verbose_name='пользователь',
+        related_name='leads',
+        on_delete=models.CASCADE
+    )
+    subscriber_username = models.CharField(
+        verbose_name='ник в Telegram',
+        max_length=32,
+    )
+    subscriber_telegram_id = models.CharField(
+        verbose_name='ник в Telegram',
+        max_length=32,
+    )
+
+    def __str__(self) -> str:
+        return f'Лид {self.id}'
+
+    class Meta:
+        verbose_name = 'лид'
+        verbose_name_plural = 'лиды'

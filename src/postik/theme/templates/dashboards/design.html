@@ -8,22 +8,26 @@
 <link rel="stylesheet" type="text/css" href="{% static 'public/css/emoji.css' %}" />
 {% endblock %}
 {% block content %}
-<div class="p-4 sm:ml-64 mx-auto mt-5" >
-  <div class="grid grid-cols-1 md:grid-cols-2">
-    <div class="flex-1 p-5" >
+<div class="px-4 sm:ml-64 mx-auto mt-3" >
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 p-4">
+    <div class="flex-1 mx-10" >
       <h1 class="font-factor-a-bold text-2xl mb-2">Дизайн</h1>
-      <span class="mb-5 font-factor-a-regular text-gray-900 text-xs">Добавьте логотип, название, описание и посты в вашу карточку</span>
+      <div class="mb-5 font-factor-a-regular text-gray-900 text-xs">Добавьте логотип, название, описание и посты в вашу карточку</div>
       <div>
         <div id="design-card-form">
           {% include "dashboards/includes/design_card_form.html" %}
         </div>
         <p class="block text-xl font-factor-a-medium text-gray-900 mt-4">Посты</p>
         <div>
-          <p class="text-sm mb-3">
-            Посты создаются через телеграм бота @postik_handler_bot
-          </p>
           <div class="block mt-3">
-            <a href="{{ telegram_create_post_link }}" class="text-white bg-black hover:bg-gray-700 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 focus:outline-none">Создать пост</a>
+            <button
+              class="text-white bg-black hover:bg-gray-700 focus:ring-4 focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 focus:outline-none"
+              hx-get="{% url "dashboards:create_post" %}"
+              hx-trigger="click"
+              hx-swap="afterbegin"
+              hx-target="#accordion-open">
+              Создать пост
+            </button>
           </div>
         </div>
         <div id="design-posts" class="mt-5">
@@ -31,12 +35,20 @@
         </div>
       </div>
     </div>
-    <div class="flex-1 p-5 mr-5">
+    <div class="flex-1 px-5 mr-5">
       <h1 class="font-factor-a-bold text-2xl mb-2">Предпросмотр</h1>
-      <div id="design-card-preview" class="overflow-x-scroll">
-        {% include "includes/card_body.html" %}
+      <div class="min-h-screen">
+        <div id="design-card-preview" class="overflow-auto rounded-lg border-2 border-gray-300 shadow-lg mx-auto">
+          {% include "includes/card_body.html" %}
+        </div>
       </div>
-    </div>
+    </div>    
   </div>
 </div>
+<script>
+  document.body.addEventListener('newPostCreated', function(event) {
+      // Обновление страницы
+      location.reload();
+  });
+</script>
 {% endblock content %}

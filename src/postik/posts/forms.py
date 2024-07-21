@@ -6,6 +6,12 @@ from .models import Card, Post
 
 
 class CardForm(forms.ModelForm):
+    image = forms.ImageField(
+        label='Изображение',
+        allow_empty_file=False,
+        help_text='Введите квадратную картинку',
+        required=False
+    )
     title = forms.CharField(
         label='Название',
         help_text='От 5 до 32 символов',
@@ -32,18 +38,6 @@ class CardForm(forms.ModelForm):
     class Meta:
         model = Card
         fields = ['image', 'title', 'description']
-
-    def save(self, commit=True):
-        card = super().save(commit=False)
-        if self.cleaned_data.get('image'):
-            card.image = self.cleaned_data['image']
-        if self.cleaned_data.get('title'):
-            card.title = self.cleaned_data['title']
-        if self.cleaned_data.get('description'):
-            card.description = self.cleaned_data['description']
-        if commit:
-            card.save()
-        return card
 
 
 class PostForm(forms.ModelForm):

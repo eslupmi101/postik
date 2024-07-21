@@ -1,28 +1,56 @@
 {% load static %}
 {% load tailwind_tags %}
-<form
-  class="mb-5"
-  method="POST"
-  hx-post="{% url 'dashboards:update_card' %}"
-  hx-swap="innerHTML"
-  hx-target="#design-card-form"
->
+<form class="mb-5" method="POST">
   {% csrf_token %}
-  {% for field in form_card %}
-    <div class="block mb-2">
-      <label for="{{ field.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ field.label }}</label>
-      {{ field }}
-      {% if field.errors %}
-        {% for error in field.errors %}
-          <div style="color: red;" class="text-red-500 text-sm">{{ error|escape }}</div>
-        {% endfor %}
-      {% endif %}
-      <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">{{ field.help_text }}</p>
-    </div>
-  {% endfor %}
   
+  <div class="block mb-4">
+    <label for="{{ form_card.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form_card.label }}</label>
+    <input
+      id="file_input"
+      name="image"
+      type="file"
+      accept="image/*"
+      class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+      aria-describedby="file_input_help"
+    >
+    <p id="file_input_help" class="mt-1 mb-2 text-sm text-gray-500">PNG, JPG.</p>
+    {% if form_card.image.errors %}
+      <div class="text-red-500 text-sm mt-1">
+        {% for error in form_card.image.errors %}
+          <div>{{ error|escape }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="block mb-4">
+    <label for="{{ form_card.title.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form_card.title.label }}</label>
+    {{ form_card.title }}
+    {% if form_card.title.errors %}
+      <div class="text-red-500 text-sm mt-1">
+        {% for error in form_card.title.errors %}
+          <div>{{ error|escape }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">{{ form_card.title.help_text }}</p>
+  </div>
+
+  <div class="block mb-4">
+    <label for="{{ form_card.description.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form_card.description.label }}</label>
+    {{ form_card.description }}
+    {% if form_card.description.errors %}
+      <div class="text-red-500 text-sm mt-1">
+        {% for error in form_card.description.errors %}
+          <div>{{ error|escape }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">{{ form_card.description.help_text }}</p>
+  </div>
+
   {% if form_card.non_field_errors %}
-    <div class="alert alert-danger">
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
       {% for error in form_card.non_field_errors %}
         <div>{{ error|escape }}</div>
       {% endfor %}
@@ -31,11 +59,16 @@
 
   <button
     type="submit"
-    class="bg-black text-white py-2 px-4 border border-blue-700 rounded"
+    class="bg-black text-white py-2 px-4 border border-transparent rounded hover:bg-gray-700 focus:ring-4 focus:ring-blue-300"
+    hx-post="{% url 'dashboards:update_card' %}"
+    hx-swap="innerHTML"
+    hx-target="#design-card-form"
+    hx-encoding="multipart/form-data"
   >
-    Сохранить карту
+    Сохранить карточку
   </button>
 </form>
+
 <!-- Trigger for update card-->
 <span
   class="hidden"

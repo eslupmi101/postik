@@ -16,6 +16,11 @@ router.register(
     views.PostPurchaseViewSet,
     basename='posts_purchase'
 )
+router.register(
+    'leads',
+    views.LeadViewSet,
+    basename='leads'
+)
 
 
 urlpatterns = [

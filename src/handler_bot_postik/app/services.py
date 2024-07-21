@@ -16,6 +16,29 @@ from core.settings import API_URL, BOT_HANDLER_ACCESS_TOKEN
 logger = logging.getLogger(__name__)
 
 
+async def create_lead(post_id: int, username: str, telegram_id: int) -> tuple[int, dict]:
+    headers = {
+        'Bot-Token': BOT_HANDLER_ACCESS_TOKEN
+    }
+    payload = {
+        'post': post_id,
+        'subscriber_username': username,
+        'subscriber_telegram_id': telegram_id
+    }
+    try:
+        async with aiohttp.ClientSession() as session:
+            url = f'{API_URL}/api/v1/leads/'
+            async with session.post(url, json=payload, headers=headers) as response:
+                try:
+                    data = await response.json()
+                except aiohttp.ContentTypeError:
+                    data = {}
+                return response.status, data
+    except aiohttp.ClientError as e:
+        logger.error(f'Cannot send post to API. {e}')
+        return 0, {}
+
+
 async def send_post_to_api(telegram_id: int, message_id: int) -> tuple[int, dict]:
     headers = {
         'Bot-Token': BOT_HANDLER_ACCESS_TOKEN
