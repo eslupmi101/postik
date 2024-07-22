@@ -15,7 +15,7 @@
       {{ card.description }}
     </p>
   </div>
-  <div class="flow-root mx-3 sm:mx-12 md:mx-12">
+  <div class="flow-root mx-1 sm:mx-2 md:mx-4 lg:mx-6 xl:mx-8">
     <ul role="list" class="divide-y divide-gray-200">
       {% for post in card.posts.all %}
       <li class="py-3">
@@ -28,7 +28,7 @@
               {{ post.title }}
             </p>
             {% if post.description|length > 64 %}
-              <div class="factor-a-regular font-light text-base md:text-lg text-gray-500">
+              <div class="factor-a-regular font-light text-sm md:text-lg text-gray-500">
                 <p id="short-description-{{ post.id }}" class="break-words">
                   {{ post.description|truncatechars:64 }}
                 </p>
@@ -44,13 +44,13 @@
               </button>
             {% else %}
               <div>
-                <p class="break-words factor-a-regular font-light text-base md:text-lg text-gray-500">
+                <p class="break-words factor-a-regular font-light text-sm md:text-lg text-gray-500">
                   {{ post.description }}
                 </p>
               </div>
             {% endif %}
           </div>
-          <div class="flex flex-col items-start space-y-2 ml-2">
+          <div class="flex flex-col items-start space-y-2 ml-4">
             <p class="block factor-a-bold font-bold text-2xl md:text-3xl">
               {{ post.price }}₽
             </p>

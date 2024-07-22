@@ -8,8 +8,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'public/css/emoji.css' %}" />
 {% endblock %}
 {% block content %}
-<div class="px-4 md:px-4 sm:ml-64 mx-auto md:mt-3" >
-  <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 md:p-4">
+<div class="p-2 md:p-1 md:pt-4 sm:ml-64">
+  <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 overflow-x-auto">
     <div class="flex-1 md:mx-10" >
       <h1 class="font-factor-a-bold text-2xl mb-2">Редактировать карточку</h1>
       <div class="mb-5 font-factor-a-regular text-gray-900 text-xs">Добавьте логотип, название, описание и посты в вашу карточку</div>
@@ -35,9 +35,9 @@
         </div>
       </div>
     </div>
-    <div class="flex-1 md:px-5 md:mr-5">
+    <div class="flex-1">
       <h1 class="font-factor-a-bold text-2xl mb-2">Предпросмотр</h1>
-      <div class="min-h-screen">
+      <div class="min-h-screen xl:mr-4">
         <div id="design-card-preview" class="overflow-clip rounded-2xl border-2 border-gray-300 shadow-lg">
           {% include "includes/card_body.html" %}
         </div>
