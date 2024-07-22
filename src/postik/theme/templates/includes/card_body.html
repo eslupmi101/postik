@@ -24,7 +24,7 @@
             {{ post.image }}
           </div>
           <div class="flex-1 min-w-0 mt-3">
-            <p class="factor-a-bold font-semibold text-lg md:text-xl text-gray-900 truncate">
+            <p class="factor-a-bold font-semibold text-lg md:text-xl text-gray-900">
               {{ post.title }}
             </p>
             {% if post.description|length > 32 %}
@@ -70,9 +70,6 @@
           </div>
         </div>
       </li>
-
-      
-
     {% endfor %}
     </ul>
   </div>

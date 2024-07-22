@@ -78,6 +78,7 @@ def update_card(request):
 def publish_card(request):
     card = get_object_or_404(Card, user=request.user)
     card.is_active = True
+    card.save()
     context = {
         'card': card
     }
@@ -89,6 +90,7 @@ def publish_card(request):
 def unpublish_card(request):
     card = get_object_or_404(Card, user=request.user)
     card.is_active = False
+    card.save()
     context = {
         'card': card
     }
@@ -109,9 +111,8 @@ def view_post(request, post_id):
 def view_post_body(request, post_id):
     post = get_object_or_404(Post, pk=post_id, user=request.user, is_active=True)
     context = {
-        'post': post,
+        'post': post
     }
-
     return render(request, 'dashboards/includes/design_post_body.html', context)
 
 
