@@ -43,13 +43,17 @@ async def start_handler_purchased_posts(message: types.Message, command: Command
             logger.debug('Create lead of post %s: %s. %s', post_id, status, data)
             post_title = data['post_details']['title']
             post_price = data['post_details']['price']
+            author_username = data['author_username']
             lead_id = data['id']
 
             await message.answer(
                 'Привет, это POSTIK!\n\n'
-                f'Заявка на покупку поста сформирована\n\n'
-                f'Пост: <b>{post_title} {post_price}₽</b>\n'
-                f'Номер заявки: {lead_id}'
+                f'Заявка на покупку поста сформирована\n'
+                f'Автор поста скоро напишет вам в телеграме насчет покупки поста\n\n'
+                f'<b>Пост:</b> {post_title}\n'
+                f'<b>Цена:</b> {post_price}₽\n'
+                f'Номер заявки: {lead_id}\n'
+                f'Автор: @{author_username}'
             )
 
             # Отправка лида владельцу
@@ -57,10 +61,12 @@ async def start_handler_purchased_posts(message: types.Message, command: Command
             message_to_subscriber = (
                 'Привет, это POSTIK!\n\n'
                 f'Ваш пост решили купить\n\n'
-                f'Пост: <b>{post_title} {post_price}₽</b>\n'
-                f'Номер заявки: {lead_id}'
+                f'Пост: {post_title}\n'
+                f'Цена: {post_price}₽\n'
+                f'Номер заявки: {lead_id}\n'
                 f'Покупатель: @{sibscriber_username}'
             )
+
             await bot_manager.send_message(
                 data['author_telegram_id'],
                 message_to_subscriber

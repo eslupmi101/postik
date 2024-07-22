@@ -32,6 +32,7 @@ class DesignPageView(TemplateView):
         ).order_by('-created_at')
         return {
             'title': 'Дизайн',
+            'is_preview': True,
             'telegram_create_post_link': get_telegram_create_post_link(),
             'card': card,
             'card_url': card_url,
@@ -45,6 +46,7 @@ class DesignPageView(TemplateView):
 def preview_card(request):
     card = get_object_or_404(Card, user=request.user)
     context = {
+        'is_preview': True,
         'card': card
     }
     return render(request, 'includes/card_body.html', context)

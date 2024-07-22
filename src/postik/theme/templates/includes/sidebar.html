@@ -46,15 +46,16 @@
       <li>
         <a href="{% url 'dashboards:design' %}" class="flex items-center p-2 px-4 text-white font-factor-a-medium hover:bg-gray-100 hover:text-black group">
           <img class="w-9 h-9 p-2 bg-black rounded-lg" aria-hidden="true" src="{% static '/public/images/dashboard/side-bar/art.svg' %}" fill="currentColor" viewBox="0 0 22 21"></img>
-          <span class="ms-3">Дизайн</span>
+          <span class="ms-3">Редактор</span>
         </a>
       </li>
+      <!--
       <li>
         <a href="#" class="flex items-center p-2 px-4 text-white font-factor-a-medium hover:bg-gray-100 hover:text-black group">
           <img class="w-9 h-9 p-2 bg-black rounded-lg" aria-hidden="true" src="{% static '/public/images/dashboard/side-bar/publish.svg' %}" fill="currentColor" viewBox="0 0 22 21"></img>
           <span class="ms-3">Финансы</span>
         </a>
-      </li>
+      </li>-->
     </ul>
     {% if card %}
       <div id="publish_button">
@@ -62,12 +63,13 @@
       </div>
     {% endif %}
     <ul class="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200">
+      <!--
       <li>
         <a href="#" class="flex items-center p-2 px-4 text-white font-factor-a-medium hover:bg-gray-100 hover:text-black group">
           <img class="w-9 h-9 p-2 bg-black rounded-lg" aria-hidden="true" src="{% static '/public/images/dashboard/side-bar/settings.svg' %}" fill="currentColor" viewBox="0 0 22 21"></img>
           <span class="ms-3">Личный кабинет</span>
         </a>
-      </li>
+      </li>-->
       <li>
         <a href="{% url 'users:logout' %}" class="flex items-center p-2 px-4 text-white font-factor-a-medium hover:bg-gray-100 hover:text-black group">
           <img class="w-9 h-9 p-2 bg-black rounded-lg" aria-hidden="true" src="{% static '/public/images/dashboard/side-bar/exit.svg' %}" fill="currentColor" viewBox="0 0 22 21"></img>

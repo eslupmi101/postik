@@ -47,14 +47,15 @@ class LeadSerializer(serializers.ModelSerializer):
     post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())
     post_details = serializers.SerializerMethodField()
     author_telegram_id = serializers.SerializerMethodField()
+    author_username = serializers.SerializerMethodField()
 
     class Meta:
         model = Lead
         fields = [
             'id', 'post', 'post_details', 'author_telegram_id', 'author',
-            'subscriber_username', 'subscriber_telegram_id'
+            'subscriber_username', 'subscriber_telegram_id', 'author_username',
         ]
-        read_only_fields = ['id', 'author', 'post_details', 'author_telegram_id']
+        read_only_fields = ['id', 'author', 'post_details', 'author_telegram_id', 'author_username']
 
     def get_post_details(self, instance):
         serializer = PostSerializer(instance.post)
@@ -62,3 +63,6 @@ class LeadSerializer(serializers.ModelSerializer):
 
     def get_author_telegram_id(self, instance):
         return instance.post.user.telegram_profile.telegram_id
+
+    def get_author_username(self, instance):
+        return instance.post.user.telegram_profile.username
