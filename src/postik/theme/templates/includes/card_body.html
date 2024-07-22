@@ -27,10 +27,10 @@
             <p class="factor-a-bold font-semibold text-lg md:text-xl text-gray-900">
               {{ post.title }}
             </p>
-            {% if post.description|length > 32 %}
+            {% if post.description|length > 64 %}
               <div class="factor-a-regular font-light text-base md:text-lg text-gray-500">
                 <p id="short-description-{{ post.id }}" class="break-words">
-                  {{ post.description|truncatechars:32 }}
+                  {{ post.description|truncatechars:64 }}
                 </p>
                 <p id="full-description-{{ post.id }}" class="hidden break-words">
                   {{ post.description }}
