@@ -1,6 +1,6 @@
 {% load static %}
 {% load static tailwind_tags %}
-<div class="md:mx-5 w-full sm:w-[42rem] bg-white rounded-2xl shadow-lg">
+<div class="w-full sm:w-[42rem] bg-white rounded-2xl shadow-lg">
   <div class="flex flex-col items-center justify-center text-center p-6">
     <img
       loading="lazy"
@@ -73,7 +73,7 @@
     {% endfor %}
     </ul>
   </div>
-  <a href="{% url "posts:index" %}" class="flex justify-center items-center my-4 py-4">
+  <a href="{% url "posts:index" %}" class="flex justify-center items-center py-8">
     <p class="Inter SemiBold font-light mr-2 opacity-30">powered by</p>
     <img class="w-24" loading="lazy" alt="Postik" src="{% static 'public/images/card/logo-card.svg' %}" />
   </a>
