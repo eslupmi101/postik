@@ -47,8 +47,8 @@ async def start_handler_purchased_posts(message: types.Message, command: Command
             lead_id = data['id']
 
             await message.answer(
-                'Привет, это POSTIK!\n\n'
-                f'Вы оставили заявку на покупку поста:\n\n'
+                'Привет, это <b>POSTIK!</b> 👋\n\n'
+                f'<b>Вы оставили заявку на покупку поста!</b> 🥳\n\n'
                 f'<b>Пост:</b> {post_title}\n'
                 f'<b>Цена:</b> {post_price}₽\n'
                 f'<b>Номер заявки:</b> {lead_id}\n'
@@ -62,8 +62,8 @@ async def start_handler_purchased_posts(message: types.Message, command: Command
             # Отправка лида владельцу
             sibscriber_username = data['subscriber_username']
             message_to_subscriber = (
-                'Привет, это POSTIK!\n\n'
-                f'У вас новая заявка на покупку поста:\n\n'
+                'Привет, это <b>POSTIK!</b> 👋\n\n'
+                f'<b>У вас новая заявка на покупку поста!</b> 🥳\n\n'
                 f'<b>Пост:</b> {post_title}\n'
                 f'<b>Цена:</b> {post_price}₽\n'
                 f'<b>Номер заявки:</b> {lead_id}\n'
