@@ -54,8 +54,8 @@ async def start_handler_purchased_posts(message: types.Message, command: Command
                 f'<b>Номер заявки:</b> {lead_id}\n'
                 f'<b>Автор:</b> @{author_username}\n\n'
                 'Для того, чтобы оплатить пост:\n\n'
-                '1. Свяжитесь с продавцом и напишите ему номер вашей заявки\n'
-                '2. Переведите средства на карту продавца\n'
+                '1. Перешлите автору это сообщение',
+                '2. Переведите средства на карту продавца, когда он ее вам пришлет',
                 '3. Отправьте чек об оплате'
             )
 
@@ -67,7 +67,11 @@ async def start_handler_purchased_posts(message: types.Message, command: Command
                 f'<b>Пост:</b> {post_title}\n'
                 f'<b>Цена:</b> {post_price}₽\n'
                 f'<b>Номер заявки:</b> {lead_id}\n'
-                f'<b>Покупатель:</b> @{sibscriber_username}'
+                f'<b>Покупатель:</b> @{sibscriber_username}\n\n',
+                '1. Дождитесь, пока покупатель перешлет вам сообщение с названием поста и номером заявки',
+                '2. Скиньте номер вашей карты и сумму для перевода',
+                '3. Получите от покупателя чек об оплате',
+                '4. Перешлите ваш пост'
             )
 
             await bot_manager.send_message(
