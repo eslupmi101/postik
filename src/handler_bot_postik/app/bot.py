@@ -48,23 +48,26 @@ async def start_handler_purchased_posts(message: types.Message, command: Command
 
             await message.answer(
                 'Привет, это POSTIK!\n\n'
-                f'Заявка на покупку поста сформирована\n'
-                f'Автор поста скоро напишет вам в телеграме насчет покупки поста\n\n'
+                f'Вы оставили заявку на покупку поста:\n\n'
                 f'<b>Пост:</b> {post_title}\n'
                 f'<b>Цена:</b> {post_price}₽\n'
-                f'Номер заявки: {lead_id}\n'
-                f'Автор: @{author_username}'
+                f'<b>Номер заявки:</b> {lead_id}\n'
+                f'<b>Автор:</b> @{author_username}\n\n'
+                'Для того, чтобы оплатить пост:\n\n'
+                '1. Свяжитесь с продавцом и напишите ему номер вашей заявки\n'
+                '2. Переведите средства на карту продавца\n'
+                '3. Отправьте чек об оплате'
             )
 
             # Отправка лида владельцу
             sibscriber_username = data['subscriber_username']
             message_to_subscriber = (
                 'Привет, это POSTIK!\n\n'
-                f'Ваш пост решили купить\n\n'
-                f'Пост: {post_title}\n'
-                f'Цена: {post_price}₽\n'
-                f'Номер заявки: {lead_id}\n'
-                f'Покупатель: @{sibscriber_username}'
+                f'У вас новая заявка на покупку поста:\n\n'
+                f'<b>Пост:</b> {post_title}\n'
+                f'<b>Цена:</b> {post_price}₽\n'
+                f'<b>Номер заявки:</b> {lead_id}\n'
+                f'<b>Покупатель:</b> @{sibscriber_username}'
             )
 
             await bot_manager.send_message(
