@@ -109,7 +109,7 @@ async def get_card_link_button(message: Message, state: FSMContext):
 
     builder.add(InlineKeyboardButton(
         text=button_text,
-        url=f'https://postik.com/cards/{username}/')
+        url=f'https://postik.tech/cards/{username}/')
     )
     await message.answer(
         message_text,
