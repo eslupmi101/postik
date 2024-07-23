@@ -1,7 +1,7 @@
 from django import forms
 from emoji import is_emoji
 
-from .constants import MAX_POST_PRICE, MIN_POST_PRICE
+from .constants import MAX_POST_PRICE, MIN_POST_PRICE, MIN_LENGTH_POST_TITLE, MAX_LENGTH_POST_TITLE
 from .models import Card, Post
 
 
@@ -47,10 +47,10 @@ class PostForm(forms.ModelForm):
     )
     title = forms.CharField(
         label='Название',
-        help_text='От 5 до 32 символов',
-        min_length=5,
-        max_length=32,
-        widget=forms.TextInput(attrs={'maxlength': 32}),
+        help_text=f'От {MIN_LENGTH_POST_TITLE} до {MAX_LENGTH_POST_TITLE} символов',
+        min_length=MIN_LENGTH_POST_TITLE,
+        max_length=MAX_LENGTH_POST_TITLE,
+        widget=forms.TextInput(attrs={'maxlength': MAX_LENGTH_POST_TITLE}),
         required=False
     )
     description = forms.CharField(
