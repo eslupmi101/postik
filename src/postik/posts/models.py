@@ -5,7 +5,7 @@ from django.db import models
 from core.models import CreateModel
 from users.models import User
 from .constants import (DEFAULT_CARD_IMAGE_PATH, DEFAULT_POST_IMAGE,
-                        MIN_POST_PRICE, MAX_POST_PRICE)
+                        MIN_POST_PRICE, MAX_POST_PRICE, MAX_LENGTH_POST_TITLE)
 
 
 class Post(CreateModel):
@@ -23,7 +23,7 @@ class Post(CreateModel):
     )
     title = models.CharField(
         verbose_name='название',
-        max_length=32,
+        max_length=MAX_LENGTH_POST_TITLE,
         validators=[MinLengthValidator(5)],
         default='название',
         blank=True,

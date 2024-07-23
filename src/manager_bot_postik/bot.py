@@ -1,15 +1,18 @@
-import os
-
 import asyncio
-import sys
 import logging
+import os
+import sys
 
 import aiohttp
-from aiogram import Bot, Dispatcher
+from aiogram import Bot, Dispatcher, F
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandObject, CommandStart
-from aiogram.types import Message
+from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import State, StatesGroup
+from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.types import InlineKeyboardButton, KeyboardButton, Message, ReplyKeyboardMarkup
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 from dotenv import load_dotenv
 from loguru import logger
 
@@ -19,7 +22,8 @@ TOKEN = os.getenv('BOT_MANAGER_TOKEN')
 API_URL = os.getenv('API_URL')
 BOT_MANAGER_ACCESS_TOKEN = os.getenv('BOT_MANAGER_ACCESS_TOKEN')
 
-dp = Dispatcher()
+storage = MemoryStorage()
+dp = Dispatcher(storage=storage)
 
 
 async def send_auth_request(
@@ -75,6 +79,67 @@ async def auth_handler(message: Message, command: CommandObject):
     }
 
     await message.answer(answer_messages[status])
+
+
+@dp.message(CommandStart())
+async def start(message: Message):
+    keyboard = ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text='Получить кнопку с ссылкой на карточку')],
+            [KeyboardButton(text='Редактировать текст кнопки со ссылкой')],
+        ],
+        resize_keyboard=True
+    )
+    await message.answer(
+        'Привет, это бот менеджер <b>POSTIK!</b>',
+        reply_markup=keyboard
+    )
+
+
+@dp.message(F.text == 'Получить кнопку с ссылкой на карточку')
+async def get_card_link_button(message: Message, state: FSMContext):
+    builder = InlineKeyboardBuilder()
+    username = message.from_user.username
+    data = await state.get_data()
+    button_text = data.get('button_text')
+    message_text = data.get('message_text')
+
+    button_text = button_text if button_text else 'Мои посты 🚀'
+    message_text = message_text if message_text else 'Вы можете купить мои платные посты здесь'
+
+    builder.add(InlineKeyboardButton(
+        text=button_text,
+        url=f'https://postik.com/cards/{username}/')
+    )
+    await message.answer(
+        message_text,
+        reply_markup=builder.as_markup()
+    )
+
+
+class EditTextStates(StatesGroup):
+    waiting_for_button_text = State()
+    waiting_for_message_text = State()
+
+
+@dp.message(F.text == 'Редактировать текст кнопки со ссылкой')
+async def edit_button_text(message: Message, state: FSMContext):
+    await message.answer('Введите новый текст для кнопки:')
+    await state.set_state(EditTextStates.waiting_for_button_text)
+
+
+@dp.message(EditTextStates.waiting_for_button_text)
+async def set_button_text(message: Message, state: FSMContext):
+    await state.update_data(button_text=message.text)
+    await message.answer('Текст кнопки обновлен. Введите новый текст для сообщения:')
+    await state.set_state(EditTextStates.waiting_for_message_text)
+
+
+@dp.message(EditTextStates.waiting_for_message_text)
+async def set_message_text(message: Message, state: FSMContext):
+    await state.update_data(message_text=message.text)
+    await message.answer('Кнопка с ссылкой сохранена!')
+    await state.set_state(state=None)
 
 
 async def main() -> None:
