@@ -1,5 +1,22 @@
 {% load static %}
 {% load static tailwind_tags %}
+{% block extra_css %}
+<style>
+  .buy_post_mobile {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .buy_post_desktop {
+      display: none;
+    }
+
+    .buy_post_mobile {
+      display: flex;
+    }
+  }
+</style>
+{% endblock extra_css %}
 <div class="bg-white rounded-2xl shadow-lg min-h-screen sm:h-full sm:min-h-fit flex flex-col justify-center">
   <div class="flex flex-col items-center justify-center text-center p-6">
     <img
@@ -26,10 +43,10 @@
             <p class="break-words factor-a-bold font-semibold text-base sm:text-xl text-gray-900">
               {{ post.title }}
             </p>
-            {% if post.description|length > 64 %}
+            {% if post.description|length > 80 %}
               <div class="break-words factor-a-regular font-light text-sm md:text-lg text-gray-500">
                 <p id="short-description-{{ post.id }}" class="break-words">
-                  {{ post.description|truncatechars:64 }}
+                  {{ post.description|truncatechars:80 }}
                 </p>
                 <p id="full-description-{{ post.id }}" class="hidden break-words">
                   {{ post.description }}
@@ -53,20 +70,37 @@
             <p class="block factor-a-bold font-bold text-xl sm:text-3xl md:text-3xl">
               {{ post.price }}₽
             </p>
-            {% if is_preview  %}
-            <button type="button" class="block mb-5 text-center text-white bg-gray-800 text-base sm:text-lg hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded px-4 py-2">
+            <div class="buy_post_desktop">
+              {% if is_preview  %}
+              <button type="button" class="block text-center text-white bg-gray-800 text-base sm:text-lg hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded px-4 py-2">
+                Купить пост
+              </button>
+              {% else %}
+              <a
+                href="tg://resolve?domain=postik_handler_bot&start=lead_create_{{ post.id }}"
+                class="block text-center text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded px-2 py-2 sm:px-4 sm:py-2 text-sm sm:text-base md:text-lg "
+                title="Перейти в Telegram для покупки поста"
+                aria-label="Купить пост через Telegram">
+                Купить пост
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="buy_post_mobile hidden flex flex-row mt-2 ml-16">
+          {% if is_preview  %}
+            <button type="button" class="block text-center text-white bg-gray-800 text-base sm:text-lg hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded px-4 py-2">
               Купить пост
             </button>
             {% else %}
             <a
               href="tg://resolve?domain=postik_handler_bot&start=lead_create_{{ post.id }}"
-              class="block mb-5 text-center text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded px-2 py-2 sm:px-4 sm:py-2 text-sm sm:text-base md:text-lg "
+              class="block text-center text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded px-2 py-2 sm:px-4 sm:py-2 text-sm sm:text-base md:text-lg "
               title="Перейти в Telegram для покупки поста"
               aria-label="Купить пост через Telegram">
               Купить пост
             </a>
-            {% endif %}
-          </div>
+          {% endif %}
         </div>
       </li>
     {% endfor %}
@@ -77,6 +111,7 @@
     <img class="w-24" loading="lazy" alt="Postik" src="{% static 'public/images/card/logo-card.svg' %}" />
   </a>
 </div>
+
 <script async>
   function toggleDescription(id) {
     var shortDescription = document.getElementById('short-description-' + id);
