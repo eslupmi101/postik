@@ -73,13 +73,14 @@
   </form>
 </div>
 <!-- Trigger for update header-->
-<span
-  class="hidden"
-  hx-trigger="load"
-  hx-get="{% url 'dashboards:view_post_heading' post_id=post.id %}"
-  hx-swap="innerHTML"
-  hx-target="#design_post_heading_{{ post.id }}"
-/>
+{% if not is_view_post  %}
+  <span
+    class="hidden"
+    hx-trigger="load"
+    hx-get="{% url 'dashboards:view_post_heading' post_id=post.id %}"
+    hx-swap="innerHTML"
+    hx-target="#design_post_heading_{{ post.id }}"
+  />
 <!-- Trigger for update card-->
 <span
   class="hidden"
@@ -88,3 +89,4 @@
   hx-swap="innerHTML"
   hx-target="#design-card-preview"
 />
+{% endif %}

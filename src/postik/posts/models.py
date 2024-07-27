@@ -4,8 +4,18 @@ from django.db import models
 
 from core.models import CreateModel
 from users.models import User
-from .constants import (DEFAULT_CARD_IMAGE_PATH, DEFAULT_POST_IMAGE,
-                        MIN_POST_PRICE, MAX_POST_PRICE, MAX_LENGTH_POST_TITLE)
+from .constants import (
+    DEFAULT_CARD_IMAGE_PATH,
+    DEFAULT_POST_IMAGE,
+    MIN_LENGTH_CARD_TITLE,
+    MAX_LENGTH_CARD_TITLE,
+    MAX_LENGTH_CARD_DESCRIPTION,
+    MIN_LENGTH_POST_TITLE,
+    MAX_LENGTH_POST_DESCRIPTION,
+    MIN_POST_PRICE,
+    MAX_POST_PRICE,
+    MAX_LENGTH_POST_TITLE
+)
 
 
 class Post(CreateModel):
@@ -24,7 +34,7 @@ class Post(CreateModel):
     title = models.CharField(
         verbose_name='название',
         max_length=MAX_LENGTH_POST_TITLE,
-        validators=[MinLengthValidator(5)],
+        validators=[MinLengthValidator(MIN_LENGTH_POST_TITLE)],
         default='название',
         blank=True,
         null=True,
@@ -34,7 +44,7 @@ class Post(CreateModel):
         default='описание',
         blank=True,
         null=True,
-        max_length=255
+        max_length=MAX_LENGTH_POST_DESCRIPTION
     )
     price = models.IntegerField(
         verbose_name='цена',
@@ -71,15 +81,15 @@ class Card(CreateModel):
     )
     title = models.CharField(
         verbose_name='название',
-        max_length=32,
-        validators=[MinLengthValidator(5)],
+        max_length=MAX_LENGTH_CARD_TITLE,
+        validators=[MinLengthValidator(MIN_LENGTH_CARD_TITLE)],
         default='название'
     )
     description = models.CharField(
         verbose_name='описание',
         blank=True,
         null=True,
-        max_length=255,
+        max_length=MAX_LENGTH_CARD_DESCRIPTION,
         default='описание'
     )
     image = models.ImageField(

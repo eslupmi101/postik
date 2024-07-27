@@ -1,7 +1,16 @@
 from django import forms
 from emoji import is_emoji
 
-from .constants import MAX_POST_PRICE, MIN_POST_PRICE, MIN_LENGTH_POST_TITLE, MAX_LENGTH_POST_TITLE
+from .constants import (
+    MIN_LENGTH_CARD_TITLE,
+    MAX_LENGTH_CARD_TITLE,
+    MAX_LENGTH_CARD_DESCRIPTION,
+    MIN_LENGTH_POST_TITLE,
+    MAX_LENGTH_POST_DESCRIPTION,
+    MIN_POST_PRICE,
+    MAX_POST_PRICE,
+    MAX_LENGTH_POST_TITLE
+)
 from .models import Card, Post
 
 
@@ -15,16 +24,16 @@ class CardForm(forms.ModelForm):
     title = forms.CharField(
         label='Название',
         help_text='От 5 до 32 символов',
-        min_length=5,
-        max_length=32,
-        widget=forms.TextInput(attrs={'maxlength': 32}),
+        min_length=MIN_LENGTH_CARD_TITLE,
+        max_length=MAX_LENGTH_CARD_TITLE,
+        widget=forms.TextInput(attrs={'maxlength': MAX_LENGTH_CARD_TITLE}),
         required=False,
     )
     description = forms.CharField(
         label='Описание',
-        help_text='До 255 символов',
-        max_length=255,
-        widget=forms.Textarea(attrs={'rows': 6, 'cols': 40, 'maxlength': 255}),
+        help_text=f'До {MAX_LENGTH_CARD_DESCRIPTION} символов',
+        max_length=MAX_LENGTH_CARD_DESCRIPTION,
+        widget=forms.Textarea(attrs={'rows': 5, 'cols': 40, 'maxlength': MAX_LENGTH_CARD_DESCRIPTION}),
         required=False
     )
 
@@ -55,9 +64,9 @@ class PostForm(forms.ModelForm):
     )
     description = forms.CharField(
         label='Описание',
-        help_text='До 255 символов',
-        max_length=255,
-        widget=forms.Textarea(attrs={'rows': 6, 'cols': 40, 'maxlength': 255}),
+        help_text=f'До {MAX_LENGTH_POST_DESCRIPTION} символов',
+        max_length=MAX_LENGTH_POST_DESCRIPTION,
+        widget=forms.Textarea(attrs={'rows': 8, 'cols': 40, 'maxlength': MAX_LENGTH_POST_DESCRIPTION}),
         required=False
     )
     price = forms.IntegerField(
@@ -87,17 +96,3 @@ class PostForm(forms.ModelForm):
         if not is_emoji(image):
             raise forms.ValidationError('The image field must contain only one emoji.')
         return image
-
-    def save(self, commit=True):
-        card = super().save(commit=False)
-        if self.cleaned_data.get('image'):
-            card.image = self.cleaned_data['image']
-        if self.cleaned_data.get('title'):
-            card.title = self.cleaned_data['title']
-        if self.cleaned_data.get('description'):
-            card.description = self.cleaned_data['description']
-        if self.cleaned_data.get('price'):
-            card.price = self.cleaned_data['price']
-        if commit:
-            card.save()
-        return card

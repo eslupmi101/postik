@@ -4,7 +4,11 @@ from .models import Card
 
 
 def index(request):
-    return render(request, 'posts/index.html')
+    context = {
+        'title': 'POSTIK',
+        'description': 'POSTIK — это инструмент, позволяющий вам зарабатывать на ваших постах.'
+    }
+    return render(request, 'posts/index.html', context)
 
 
 def card(request, telegram_username):

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load static tailwind_tags %}
+{% block content %}
+<div class="flex flex-col h-screen items-center justify-center">
+  <h1 class="text-3xl block mb-4">Cтраница не найдена</h1>
+  <a class="py-2 px-4 bg-black hover:bg-gray-400 text-white rounded-lg" href="{%  url "posts:index" %}">Перейти в на главную страницу</a>
+</div>
+{% endblock content %}

@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'tailwind',
     # Tailwind app
     'theme',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -134,6 +136,7 @@ TAILWIND_APP_NAME = 'theme'
 INTERNAL_IPS = [
     '127.0.0.1',
     'localhost',
+    'postik.tech',
 ]
 
 TAILWIND_DEV_MODE = True
@@ -142,3 +145,28 @@ TAILWIND_DEV_MODE = True
 LOGIN_URL = 'users:signup'
 
 LOGIN_REDIRECT_URL = 'dashboards:design'
+
+# CORS
+
+CORS_ALLOWED_ORIGINS = [
+    'https://postik.tech',
+    'http://localhost:8000',
+    'http://localhost:8001',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://postik.tech',
+    'http://localhost:8000',
+    'http://localhost:8001',
+]
+
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'authorization',
+    'content-type',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Bot-Token',
+    'telegram-id'
+)

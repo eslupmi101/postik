@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load static tailwind_tags %}
+{% block content %}
+<div class="flex flex-col h-screen items-center justify-center">
+  <h1 class="text-3xl block mb-3">Произошла ошибка</h1>
+  <h2 class="text-lg">Напишите боту подробности об ошибке @postik_help_bot</h2>
+  <h2 class="text-lg block mb-2">и вы сделаете POSTIK еще лучше</h2>
+  <a class="py-2 px-4 bg-black hover:bg-gray-400 text-white rounded-lg" href="tg://resolve?domain=postik_help_bot">Перейти в бота</a>
+</div>  
+{% endblock content %}

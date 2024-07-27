@@ -13,11 +13,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'public/images/favicon-16x16.png' %}">
     {% tailwind_css %}
     <title>{% block title %}{{ title }}{% endblock %}</title>
+    <meta property="og:keywords" content={{ keywords }}/>
+    <meta property="og:title" content={{ title }}/>
+    <meta property="og:description" content={{ description }}/>
     {% block extra_css %}
     {% endblock %}
-
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
+    <script async type="text/javascript" >
       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
       m[i].l=1*new Date();
       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
@@ -32,20 +34,20 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/97883645" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-    <script src="{% static "public/js/lazysizes.min.js" %}"></script>
-    <script async src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
-    <script async src="https://unpkg.com/hyperscript.org@0.9.12"></script>
-    <script async src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <script async src="{% static "js/lazysizes.min.js" %}"></script>
+    <script async src="{% static "js/flowbite.min.js" %}"></script>
+    <script async src="{% static "js/hyperscript.org@0.9.12" %}"></script>
+    <script async src="{% static "js/htmx.org@1.6.1" %}"></script>
 	</head>
 	<body class="leading-normal tracking-normal">
     <header>
       {% block extra_header%}
       {% endblock %}
     </header>
-    <div class="container mx-auto">
-			{% block content %}
-			{% endblock %}
-		</div>
+    <main class="container mx-auto">
+      {% block content %}
+      {% endblock %}
+		</main>
     {% block autonomous_content %}
     {% endblock autonomous_content %}
 		{% block extra_footer%}

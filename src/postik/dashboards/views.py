@@ -31,7 +31,7 @@ class DesignPageView(TemplateView):
             is_active=True
         ).order_by('-created_at')
         return {
-            'title': 'Дизайн',
+            'title': 'Редактор',
             'is_preview': True,
             'telegram_create_post_link': get_telegram_create_post_link(),
             'card': card,
